@@ -24,7 +24,7 @@ The wireframes show the main pages and layout of the platform.
 
 The Entity Relationship Diagram shows the database entities and their relationships.
 
-![HOMIZ ERD](planning/erd.png)
+![HOMIZ ERD](planning/erd.jpg)
 
 ---
 
