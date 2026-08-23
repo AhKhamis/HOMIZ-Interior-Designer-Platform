@@ -14,7 +14,19 @@
     <p><%= project.category %></p>
     <p><%= project.location %></p>
 
+    <h2>Services</h2>
+
+    <ul>
+    <% project.services.forEach(service => { %>
+    <li><%= service.name %></li>
+    <% }) %>
+    </ul>
+
     <a href="/projects/<%= project._id %>/edit">Edit</a>
+
+    <form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete</button>
+    </form>
 
     <a href="/projects" class="button">Back to Projects</a>
 

@@ -24,12 +24,24 @@
   <label>Location</label>
   <input type="text" name="location">
 
+  <label>Services</label>
+
+  <% services.forEach(service => { %>
+    <div>
+      <input
+        type="checkbox"
+        name="services"
+        value="<%= service._id %>"
+      >
+      <label><%= service.name %></label>
+    </div>
+  <% }) %>
+
   <label>Image</label>
   <input type="text" name="image">
 
   <button type="submit">Create Project</button>
 
 </form>
-    
 </body>
 </html>

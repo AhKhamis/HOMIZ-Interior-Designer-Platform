@@ -13,8 +13,13 @@
 <% projects.forEach(project => { %>
   <h2><%= project.title %></h2>
   <p><%= project.description %></p>
-<% }) %>
 
-<a href="/" class="button">Back to Home</a>
+  <a href="/projects/<%= project._id %>">View</a>
+<% }) %>
+ <br>
+  <br>
+<a href="/projects/new">Add Project</a>
+ <br>
+<a href="/">Back to Home</a>
 </body>
 </html>

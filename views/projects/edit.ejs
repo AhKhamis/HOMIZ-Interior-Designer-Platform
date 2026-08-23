@@ -23,6 +23,20 @@
   <label>Location</label>
   <input type="text" name="location" value="<%= project.location %>">
 
+  <label>Services</label>
+
+<% services.forEach(service => { %>
+  <div>
+    <input
+      type="checkbox"
+      name="services"
+      value="<%= service._id %>"
+      <%= project.services.some(projectService => projectService._id.toString() === service._id.toString()) ? 'checked' : '' %>
+    >
+    <label><%= service.name %></label>
+  </div>
+<% }) %>
+
   <label>Image</label>
   <input type="text" name="image" value="<%= project.image %>">
 
