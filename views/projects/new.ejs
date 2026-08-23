@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New project page</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Create Project</h1>
+
+<form action="/projects" method="POST">
+
+  <label>Title</label>
+  <input type="text" name="title">
+
+  <label>Description</label>
+  <textarea name="description"></textarea>
+
+  <label>Category</label>
+  <input type="text" name="category">
+
+  <label>Location</label>
+  <input type="text" name="location">
+
+  <label>Image</label>
+  <input type="text" name="image">
+
+  <button type="submit">Create Project</button>
+
+</form>
+    
+</body>
+</html>

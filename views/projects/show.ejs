@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index project page</title>
+    <title>Show project page</title>
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-    
-    <h1>Projects</h1>
 
-<% projects.forEach(project => { %>
-  <h2><%= project.title %></h2>
-  <p><%= project.description %></p>
-<% }) %>
+    <h1><%= project.title %></h1>
+
+    <p><%= project.description %></p>
+    <p><%= project.category %></p>
+    <p><%= project.location %></p>
 </body>
 </html>
