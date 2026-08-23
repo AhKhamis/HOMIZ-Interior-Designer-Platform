@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/partials.css">
     <title>New project page</title>
 </head>
 <body>
@@ -37,8 +38,13 @@
     </div>
   <% }) %>
 
-  <label>Image</label>
-  <input type="text" name="image">
+  <label>Image URL</label>
+<input
+  type="url"
+  name="image"
+  placeholder="https://example.com/image.jpg"
+  required
+>
 
   <button type="submit">Create Project</button>
 

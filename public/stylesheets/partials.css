@@ -1,12 +1,42 @@
-#navbar{
+#navbar {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: #ffffff;
 }
 
-.nav-link{
-
+#navbar .logo img {
+  width: 100px;
+  height: auto;
+  display: block;
 }
 
-#footer{
-
+#navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
+#navbar .nav-link {
+  text-decoration: none;
+  color: #222222;
+  font-size: 15px;
+}
+
+#navbar .auth-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#navbar .auth-links .nav-link {
+  background-color: #222222;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+#navbar .auth-links .nav-link:hover {
+  opacity: 0.85;
+}
