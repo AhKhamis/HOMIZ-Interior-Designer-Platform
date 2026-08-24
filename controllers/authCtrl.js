@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Designer = require('../models/designer');
 
 const SALT_ROUDS = 10;
 
@@ -29,10 +30,14 @@ const register = async (req, res) => {
     // if password matches create the new user
     const user = await User.create(req.body);
 
-    req.session.user = {
-      username: user.username,
-      _id: user._id,
-    };
+  await Designer.create({
+    user: user._id,
+  });
+
+  req.session.user = {
+    username: user.username,
+    _id: user._id,
+  };
     // redirect to homepage
     req.session.save(() => {
       res.redirect('/');

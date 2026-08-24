@@ -19,6 +19,7 @@ const addUserToViews = require('./middleware/addUserToViews');
 const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
 // My New Routers
+const designersRouter = require('./routes/designersRouter');
 const projectsRouter = require('./routes/projectsRouter');
 
 // Set the port from environment variable or default to 3000
@@ -46,6 +47,7 @@ app.use(addUserToViews);
 app.use('', pagesRouter);
 app.use('/auth', authRouter);
 // My New Routers
+app.use('/designers', designersRouter);
 app.use('/projects', projectsRouter);
 
 

@@ -10,6 +10,7 @@ router.post('/', isSignedIn, projectsCtrl.create);
 router.get('/:id/edit', isSignedIn, projectsCtrl.edit);
 router.put('/:id', isSignedIn, projectsCtrl.update);
 router.delete('/:id', isSignedIn, projectsCtrl.deleteProject);
+router.get('/dashboard', isSignedIn, projectsCtrl.dashboard);
 
 router.get('/:id', projectsCtrl.show);
 

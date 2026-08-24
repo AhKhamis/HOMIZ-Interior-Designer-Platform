@@ -40,3 +40,15 @@
 #navbar .auth-links .nav-link:hover {
   opacity: 0.85;
 }
+
+#navbar .dashboard-button {
+  background-color: #f8fffd;
+  color: #222222;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+#navbar .auth-links .dashboard-button {
+  background-color: #e18c43;
+  color: #f8fffd;
+}

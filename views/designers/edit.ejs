@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
+    <title>Designer Edit Page</title>
+</head>
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+<h1>Edit Designer Profile</h1>
+
+<form action="/designers/profile?_method=PUT" method="POST">
+
+  <label for="bio">Bio</label>
+  <textarea id="bio" name="bio"><%= designer.bio || '' %></textarea>
+
+  <label for="specialization">Specialization</label>
+  <input
+    type="text"
+    id="specialization"
+    name="specialization"
+    value="<%= designer.specialization || '' %>"
+  >
+
+  <button type="submit">Save Profile</button>
+
+</form>
+
+<a href="/projects/dashboard">Back to Dashboard</a>
+    
+</body>
+</html>
