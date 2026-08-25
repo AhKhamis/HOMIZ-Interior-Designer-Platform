@@ -17,38 +17,36 @@
 
   <h1>Admin Dashboard</h1>
 
-  <h2>Pending Designers</h2>
+  <h2>All Users</h2>
 
-  <% if (designers.length > 0) { %>
+  <% if (users.length > 0) { %>
 
-    <% designers.forEach(designer => { %>
+    <% users.forEach(user => { %>
 
       <div>
-        <h3><%= designer.user.name %></h3>
+
+        <h3><%= user.name %></h3>
 
         <p>
           <strong>Username:</strong>
-          <%= designer.user.username %>
+          <%= user.username %>
         </p>
 
         <p>
-          <strong>Specialization:</strong>
-          <%= designer.specialization || 'Not specified' %>
+          <strong>Role:</strong>
+          <%= user.role %>
         </p>
 
-        <form
-          action="/admin/designers/<%= designer._id %>/approve?_method=PUT"
-          method="POST"
-        >
-          <button type="submit">Approve</button>
-        </form>
+        <% if (user.role !== 'admin') { %>
 
-        <form
-          action="/admin/designers/<%= designer._id %>/reject?_method=PUT"
-          method="POST"
-        >
-          <button type="submit">Reject</button>
-        </form>
+          <form
+            action="/admin/users/<%= user._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button type="submit">Delete</button>
+          </form>
+
+        <% } %>
 
       </div>
 
@@ -56,41 +54,7 @@
 
   <% } else { %>
 
-    <p>No pending designers.</p>
-
-  <% } %>
-
-
-  <h2>Pending Projects</h2>
-
-  <% if (projects.length > 0) { %>
-
-    <% projects.forEach(project => { %>
-
-      <div>
-        <h3><%= project.title %></h3>
-
-        <p>
-          <%= project.description %>
-        </p>
-
-        <p>
-          <strong>Category:</strong>
-          <%= project.category %>
-        </p>
-
-        <p>
-          <strong>Location:</strong>
-          <%= project.location %>
-        </p>
-
-      </div>
-
-    <% }) %>
-
-  <% } else { %>
-
-    <p>No pending projects.</p>
+    <p>No users found.</p>
 
   <% } %>
 

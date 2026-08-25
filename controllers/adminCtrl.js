@@ -1,19 +1,13 @@
+const User = require('../models/user');
 const Designer = require('../models/designer');
 const Project = require('../models/project');
 
 const dashboard = async (req, res) => {
   try {
-    const designers = await Designer.find({
-      status: 'pending',
-    }).populate('user');
-
-    const projects = await Project.find({
-      status: 'pending',
-    });
+    const users = await User.find();
 
     res.render('admin/dashboard.ejs', {
-      designers,
-      projects,
+      users,
     });
   } catch (err) {
     console.log(err);
@@ -21,24 +15,23 @@ const dashboard = async (req, res) => {
   }
 };
 
-const approveDesigner = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
-    await Designer.findByIdAndUpdate(req.params.id, {
-      status: 'approved',
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.redirect('/admin');
+    }
+
+    await Designer.findOneAndDelete({
+      user: user._id,
     });
 
-    res.redirect('/admin');
-  } catch (err) {
-    console.log(err);
-    res.redirect('/admin');
-  }
-};
-
-const rejectDesigner = async (req, res) => {
-  try {
-    await Designer.findByIdAndUpdate(req.params.id, {
-      status: 'rejected',
+    await Project.deleteMany({
+      designer: user._id,
     });
+
+    await User.findByIdAndDelete(user._id);
 
     res.redirect('/admin');
   } catch (err) {
@@ -49,6 +42,5 @@ const rejectDesigner = async (req, res) => {
 
 module.exports = {
   dashboard,
-  approveDesigner,
-  rejectDesigner,
+  deleteUser,
 };

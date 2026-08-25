@@ -6,16 +6,10 @@ const router = express.Router();
 
 router.get('/', isAdmin, adminCtrl.dashboard);
 
-router.put(
-  '/designers/:id/approve',
+router.delete(
+  '/users/:id',
   isAdmin,
-  adminCtrl.approveDesigner
-);
-
-router.put(
-  '/designers/:id/reject',
-  isAdmin,
-  adminCtrl.rejectDesigner
+  adminCtrl.deleteUser
 );
 
 module.exports = router;

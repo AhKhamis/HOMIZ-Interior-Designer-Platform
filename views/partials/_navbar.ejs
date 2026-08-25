@@ -9,17 +9,64 @@
     <a href="/#services" class="nav-link">Services</a>
     <a href="/projects" class="nav-link">Projects</a>
     <a href="/designers" class="nav-link">Designers</a>
-    <a href="#" class="nav-link">Blog</a>
+
+    <a href="/blog" class="nav-link">Blog</a>
+
   </div>
 
   <div class="auth-links">
     <% if (user) { %>
 
-      <a class="nav-link dashboard-button" href="/projects/dashboard">Dashboard</a>
-      <a class="nav-link" href="/auth/sign-out">Sign Out</a>
+      <% if (user.role === 'admin') { %>
+
+        <a
+          href="/admin"
+          class="nav-link dashboard-button"
+        >
+          Admin Dashboard
+        </a>
+
+        <a
+          href="/auth/sign-out"
+          class="nav-link"
+        >
+          Sign Out
+        </a>
+
+      <% } else { %>
+
+        <a
+          href="/projects/dashboard"
+          class="nav-link dashboard-button"
+        >
+          Dashboard
+        </a>
+
+        <a
+          href="/auth/sign-out"
+          class="nav-link"
+        >
+          Sign Out
+        </a>
+
+      <% } %>
+
     <% } else { %>
-      <a class="nav-link" href="/auth/sign-up">Sign Up</a>
-      <a class="nav-link" href="/auth/sign-in">Sign In</a>
+
+      <a
+        href="/auth/sign-up"
+        class="nav-link"
+      >
+        Sign Up
+      </a>
+
+      <a
+        href="/auth/sign-in"
+        class="nav-link"
+      >
+        Sign In
+      </a>
+
     <% } %>
   </div>
 
