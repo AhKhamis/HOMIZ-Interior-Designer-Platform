@@ -25,6 +25,19 @@
 
   </article>
 
+  <% if (user && user.role === 'admin') { %>
+
+  <a href="/blog/<%= blog._id %>/edit">Edit</a>
+
+  <form
+    action="/blog/<%= blog._id %>?_method=DELETE"
+    method="POST"
+  >
+    <button type="submit">Delete</button>
+  </form>
+
+<% } %>
+
   <a href="/blog">Back to Blog</a>
 
 </body>
