@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+
+  <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+  <%- include('../partials/_navbar.ejs') %>
+
+  <h1>Admin Dashboard</h1>
+
+  <h2>Pending Designers</h2>
+
+  <% if (designers.length > 0) { %>
+
+    <% designers.forEach(designer => { %>
+
+      <div>
+        <h3><%= designer.user.name %></h3>
+
+        <p>
+          <strong>Username:</strong>
+          <%= designer.user.username %>
+        </p>
+
+        <p>
+          <strong>Specialization:</strong>
+          <%= designer.specialization || 'Not specified' %>
+        </p>
+
+        <form
+          action="/admin/designers/<%= designer._id %>/approve?_method=PUT"
+          method="POST"
+        >
+          <button type="submit">Approve</button>
+        </form>
+
+        <form
+          action="/admin/designers/<%= designer._id %>/reject?_method=PUT"
+          method="POST"
+        >
+          <button type="submit">Reject</button>
+        </form>
+
+      </div>
+
+    <% }) %>
+
+  <% } else { %>
+
+    <p>No pending designers.</p>
+
+  <% } %>
+
+
+  <h2>Pending Projects</h2>
+
+  <% if (projects.length > 0) { %>
+
+    <% projects.forEach(project => { %>
+
+      <div>
+        <h3><%= project.title %></h3>
+
+        <p>
+          <%= project.description %>
+        </p>
+
+        <p>
+          <strong>Category:</strong>
+          <%= project.category %>
+        </p>
+
+        <p>
+          <strong>Location:</strong>
+          <%= project.location %>
+        </p>
+
+      </div>
+
+    <% }) %>
+
+  <% } else { %>
+
+    <p>No pending projects.</p>
+
+  <% } %>
+
+</body>
+
+</html>

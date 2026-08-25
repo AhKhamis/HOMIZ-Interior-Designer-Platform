@@ -12,6 +12,11 @@ const designerSchema = new mongoose.Schema({
   specialization: {
     type: String,
   },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending',
+  },
 });
 
 const Designer = mongoose.model('Designer', designerSchema);

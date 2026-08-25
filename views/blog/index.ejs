@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+  <title>Blog</title>
+</head>
+
+<body>
+
+  <%- include('../partials/_navbar.ejs') %>
+
+  <h1>Blog</h1>
+
+  <% if (blogs.length > 0) { %>
+
+    <% blogs.forEach(blog => { %>
+
+      <article>
+
+        <% if (blog.image) { %>
+          <img src="<%= blog.image %>" alt="<%= blog.title %>">
+        <% } %>
+
+        <h2><%= blog.title %></h2>
+
+        <p><%= blog.content %></p>
+
+        <a href="/blog/<%= blog._id %>">Read More</a>
+
+      </article>
+
+    <% }) %>
+
+  <% } else { %>
+
+    <p>No blog posts yet.</p>
+
+  <% } %>
+
+</body>
+
+</html>

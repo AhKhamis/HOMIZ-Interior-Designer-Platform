@@ -20,6 +20,8 @@ const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
 // My New Routers
 const designersRouter = require('./routes/designersRouter');
+const adminRouter = require('./routes/adminRouter');
+const blogRouter = require('./routes/blogRouter');
 const projectsRouter = require('./routes/projectsRouter');
 
 // Set the port from environment variable or default to 3000
@@ -48,6 +50,8 @@ app.use('', pagesRouter);
 app.use('/auth', authRouter);
 // My New Routers
 app.use('/designers', designersRouter);
+app.use('/admin', adminRouter);
+app.use('/blog', blogRouter);
 app.use('/projects', projectsRouter);
 
 

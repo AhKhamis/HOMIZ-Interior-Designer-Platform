@@ -37,6 +37,7 @@ const register = async (req, res) => {
   req.session.user = {
     username: user.username,
     _id: user._id,
+    role: user.role,
   };
     // redirect to homepage
     req.session.save(() => {
@@ -68,9 +69,10 @@ const login = async (req, res) => {
   // There is a user AND they had the correct password. Time to make a session!
   // Avoid storing the password, even in hashed format, in the session
   // If there is other data you want to save to `req.session.user`, do so here!
-  req.session.user = {
+    req.session.user = {
     username: userInDatabase.username,
     _id: userInDatabase._id,
+    role: userInDatabase.role,
   };
 
   req.session.save(() => {
