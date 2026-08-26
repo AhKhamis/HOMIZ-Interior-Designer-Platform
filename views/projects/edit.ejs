@@ -1,63 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Edit project page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+
+  <title>Edit Project</title>
 </head>
+
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+  <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Edit Project</h1>
+  <h1>Edit Project</h1>
 
-<form action="/projects/<%= project._id %>?_method=PUT" method="POST">
+  <form
+    action="/projects/<%= project._id %>?_method=PUT"
+    method="POST"
+    enctype="multipart/form-data"
+  >
 
-  <label>Title</label>
-  <input type="text" name="title" value="<%= project.title %>">
+    <label>Title</label>
 
-  <label>Description</label>
-  <textarea name="description"><%= project.description %></textarea>
-
-  <label>Category</label>
-  <input type="text" name="category" value="<%= project.category %>">
-
-  <label>Location</label>
-  <input type="text" name="location" value="<%= project.location %>">
-
-  <label>Services</label>
-
-<% services.forEach(service => { %>
-  <div>
     <input
-      type="checkbox"
-      name="services"
-      value="<%= service._id %>"
-      <%= project.services.some(projectService => projectService._id.toString() === service._id.toString()) ? 'checked' : '' %>
+      type="text"
+      name="title"
+      value="<%= project.title %>"
+      required
     >
-    <label><%= service.name %></label>
-  </div>
-<% }) %>
 
-  <label>Current Image</label>
+    <label>Description</label>
 
-<img src="<%= project.image %>" alt="<%= project.title %>">
+    <textarea
+      name="description"
+      required
+    ><%= project.description %></textarea>
 
-<label>Image URL</label>
-<input
-  type="url"
-  name="image"
-  value="<%= project.image %>"
-  required
->
+    <label>Category</label>
 
-  <button type="submit">Update Project</button>
+    <input
+      type="text"
+      name="category"
+      value="<%= project.category %>"
+      required
+    >
 
-</form>
+    <label>Location</label>
 
-<a href="/projects/<%= project._id %>" class="button">Back</a>
-    
+    <input
+      type="text"
+      name="location"
+      value="<%= project.location %>"
+      required
+    >
+
+    <label>Services</label>
+
+    <% services.forEach(service => { %>
+
+      <div>
+
+        <input
+          type="checkbox"
+          name="services"
+          value="<%= service._id %>"
+          <%= project.services.some(
+            projectService =>
+              projectService._id.toString() === service._id.toString()
+          ) ? 'checked' : '' %>
+        >
+
+        <label>
+          <%= service.name %>
+        </label>
+
+      </div>
+
+    <% }) %>
+
+
+    <h2>Current Main Image</h2>
+
+    <% if (project.mainImage && project.mainImage.url) { %>
+
+      <img
+        src="<%= project.mainImage.url %>"
+        alt="<%= project.title %>"
+        width="300"
+      >
+
+    <% } else { %>
+
+      <p>No main image.</p>
+
+    <% } %>
+
+
+    <h2>Current Gallery</h2>
+
+    <% if (project.galleryImages && project.galleryImages.length > 0) { %>
+
+      <% project.galleryImages.forEach((image, index) => { %>
+
+        <div>
+
+          <img
+            src="<%= image.url %>"
+            alt="<%= project.title %> image <%= index + 1 %>"
+            width="200"
+          >
+
+        </div>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <p>No gallery images.</p>
+
+    <% } %>
+
+
+    <h2>Replace Images</h2>
+
+    <p>
+      Select up to 5 new images. Choose one as the new main image.
+    </p>
+
+    <input
+      type="file"
+      name="images"
+      id="images"
+      accept=".jpg,.jpeg,.png,.webp"
+      multiple
+    >
+
+    <div id="image-preview"></div>
+
+
+    <button type="submit">
+      Update Project
+    </button>
+
+  </form>
+
+
+  <a
+    href="/projects/<%= project._id %>"
+    class="button"
+  >
+    Back
+  </a>
+
+
+  <script>
+
+    const imagesInput = document.getElementById('images');
+    const preview = document.getElementById('image-preview');
+
+    imagesInput.addEventListener('change', () => {
+
+      preview.innerHTML = '';
+
+      const files = Array.from(imagesInput.files);
+
+      if (files.length > 5) {
+
+        alert('You can select up to 5 images.');
+
+        imagesInput.value = '';
+
+        return;
+      }
+
+      files.forEach((file, index) => {
+
+        const container = document.createElement('div');
+
+        const image = document.createElement('img');
+
+        image.src = URL.createObjectURL(file);
+        image.width = 200;
+
+        const label = document.createElement('label');
+
+        const radio = document.createElement('input');
+
+        radio.type = 'radio';
+        radio.name = 'mainImageIndex';
+        radio.value = index;
+
+        label.appendChild(radio);
+
+        label.appendChild(
+          document.createTextNode(' Main Image')
+        );
+
+        container.appendChild(image);
+        container.appendChild(label);
+
+        preview.appendChild(container);
+
+      });
+
+    });
+
+  </script>
+
 </body>
 </html>

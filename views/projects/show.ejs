@@ -1,38 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Show project page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+
+  <title><%= project.title %></title>
 </head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
 
-    <h1><%= project.title %></h1>
+  <%- include('../partials/_navbar.ejs') %>
 
-    <img src="<%= project.image %>" alt="<%= project.title %>">
+  <h1><%= project.title %></h1>
 
-    <p><%= project.description %></p>
-    <p><%= project.category %></p>
-    <p><%= project.location %></p>
+  <h2>Main Image</h2>
 
-    <h2>Services</h2>
+  <% if (project.mainImage && project.mainImage.url) { %>
 
-    <ul>
-    <% project.services.forEach(service => { %>
-    <li><%= service.name %></li>
+    <img
+      src="<%= project.mainImage.url %>"
+      alt="<%= project.title %>"
+      style="width: 600px; height: auto;"
+    >
+
+  <% } else { %>
+
+    <p>No main image.</p>
+
+  <% } %>
+
+
+  <% if (project.galleryImages && project.galleryImages.length > 0) { %>
+
+    <h2>Project Gallery</h2>
+
+    <% project.galleryImages.forEach((image, index) => { %>
+
+      <div>
+
+        <img
+          src="<%= image.url %>"
+          alt="<%= project.title %> image <%= index + 1 %>"
+          style="width: 300px; height: auto;"
+        >
+
+      </div>
+
     <% }) %>
-    </ul>
 
-    <a href="/projects/<%= project._id %>/edit">Edit</a>
+  <% } else { %>
 
-    <form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete</button>
-    </form>
+    <p>No gallery images.</p>
 
-    <a href="/projects" class="button">Back to Projects</a>
+  <% } %>
+
+
+  <p><strong>Description:</strong> <%= project.description %></p>
+
+  <p><strong>Category:</strong> <%= project.category %></p>
+
+  <p><strong>Location:</strong> <%= project.location %></p>
+
+
+  <h2>Services</h2>
+
+  <ul>
+
+    <% project.services.forEach(service => { %>
+
+      <li><%= service.name %></li>
+
+    <% }) %>
+
+  </ul>
+
+
+  <a href="/projects/<%= project._id %>/edit">
+    Edit
+  </a>
+
+
+  <form
+    action="/projects/<%= project._id %>?_method=DELETE"
+    method="POST"
+  >
+
+    <button type="submit">
+      Delete
+    </button>
+
+  </form>
+
+
+  <a href="/projects" class="button">
+    Back to Projects
+  </a>
 
 </body>
 </html>

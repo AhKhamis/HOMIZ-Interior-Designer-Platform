@@ -2,9 +2,7 @@ const Designer = require('../models/designer');
 
 const index = async (req, res) => {
   try {
-    const designers = await Designer.find({
-    status: 'approved',
-  }).populate('user');
+    const designers = await Designer.find().populate('user');
 
     res.render('designers/index.ejs', { designers });
   } catch (err) {

@@ -1,54 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>New project page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+
+  <title>New Project</title>
 </head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Create Project</h1>
+  <%- include('../partials/_navbar.ejs') %>
 
-<form action="/projects" method="POST">
+  <h1>Create Project</h1>
 
-  <label>Title</label>
-  <input type="text" name="title">
+  <form
+    action="/projects"
+    method="POST"
+    enctype="multipart/form-data"
+  >
 
-  <label>Description</label>
-  <textarea name="description"></textarea>
+    <label>Title</label>
 
-  <label>Category</label>
-  <input type="text" name="category">
+    <input
+      type="text"
+      name="title"
+      required
+    >
 
-  <label>Location</label>
-  <input type="text" name="location">
+    <label>Description</label>
 
-  <label>Services</label>
+    <textarea
+      name="description"
+      required
+    ></textarea>
 
-  <% services.forEach(service => { %>
-    <div>
-      <input
-        type="checkbox"
-        name="services"
-        value="<%= service._id %>"
-      >
-      <label><%= service.name %></label>
-    </div>
-  <% }) %>
+    <label>Category</label>
 
-  <label>Image URL</label>
-<input
-  type="url"
-  name="image"
-  placeholder="https://example.com/image.jpg"
-  required
->
+    <input
+      type="text"
+      name="category"
+      required
+    >
 
-  <button type="submit">Create Project</button>
+    <label>Location</label>
 
-</form>
+    <input
+      type="text"
+      name="location"
+      required
+    >
+
+    <label>Services</label>
+
+    <% services.forEach(service => { %>
+
+      <div>
+
+        <input
+          type="checkbox"
+          name="services"
+          value="<%= service._id %>"
+        >
+
+        <label>
+          <%= service.name %>
+        </label>
+
+      </div>
+
+    <% }) %>
+
+    <label for="images">
+      Project Images
+    </label>
+
+    <p>
+      Select 1 to 5 images and choose one as the main image.
+    </p>
+
+    <input
+      type="file"
+      name="images"
+      id="images"
+      accept=".jpg,.jpeg,.png,.webp"
+      multiple
+      required
+    >
+
+    <div id="image-preview"></div>
+
+    <button type="submit">
+      Create Project
+    </button>
+
+  </form>
+
+  <script>
+
+    const imagesInput = document.getElementById('images');
+    const preview = document.getElementById('image-preview');
+
+    imagesInput.addEventListener('change', () => {
+
+      preview.innerHTML = '';
+
+      const files = Array.from(imagesInput.files);
+
+      if (files.length > 5) {
+        alert('You can select up to 5 images.');
+        imagesInput.value = '';
+        return;
+      }
+
+      files.forEach((file, index) => {
+
+        const container = document.createElement('div');
+
+        const image = document.createElement('img');
+
+        image.src = URL.createObjectURL(file);
+        image.width = 200;
+
+        const label = document.createElement('label');
+
+        const radio = document.createElement('input');
+
+        radio.type = 'radio';
+        radio.name = 'mainImageIndex';
+        radio.value = index;
+        radio.required = true;
+
+        label.appendChild(radio);
+
+        label.appendChild(
+          document.createTextNode(' Main Image')
+        );
+
+        container.appendChild(image);
+        container.appendChild(label);
+
+        preview.appendChild(container);
+
+      });
+
+    });
+
+  </script>
+
 </body>
 </html>

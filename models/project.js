@@ -17,24 +17,45 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
+
+  mainImage: {
+    url: {
+      type: String,
+      default: '',
+    },
+
+    publicId: {
+      type: String,
+      default: '',
+    },
   },
+
+  galleryImages: [
+    {
+      url: {
+        type: String,
+        required: true,
+      },
+
+      publicId: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+
   designer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Designer',
     required: true,
   },
-  services: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Service',
-  }],
-  status: {
-  type: String,
-  enum: ['pending', 'approved', 'rejected'],
-  default: 'pending',
-},
+
+  services: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Service',
+    },
+  ],
 });
 
 const Project = mongoose.model('Project', projectSchema);

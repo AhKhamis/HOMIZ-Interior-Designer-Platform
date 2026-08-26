@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>index designer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/partials.css" />
+  <title>Designers</title>
 </head>
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+  <%- include('../partials/_navbar.ejs') %>
 
-<h1>Designers</h1>
+  <h1>Designers</h1>
 
-<% designers.forEach(designer => { %>
+  <% designers.forEach(designer => { %>
 
-  <div>
-    <h2><%= designer.user.name %></h2>
+    <div>
 
-    <p>
-      <strong>Specialization:</strong>
-      <%= designer.specialization || 'Not specified' %>
-    </p>
+      <% if (designer.profileImageUrl) { %>
 
-    <p>
-      <%= designer.bio || 'No bio available.' %>
-    </p>
-  </div>
+        <img
+          src="<%= designer.profileImageUrl %>"
+          alt="<%= designer.user.name %>'s profile"
+          width="250"
+        />
 
-<% }) %>
-    
+      <% } %>
+
+      <h2><%= designer.user.name %></h2>
+
+      <p>
+        <strong>Specialization:</strong>
+        <%= designer.specialization || 'Not specified' %>
+      </p>
+
+      <p>
+        <%= designer.bio || 'No bio available.' %>
+      </p>
+
+    </div>
+
+  <% }) %>
+
 </body>
 </html>

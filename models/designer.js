@@ -14,6 +14,16 @@ const designerSchema = new mongoose.Schema({
   specialization: {
     type: String,
   },
+
+  profileImageUrl: {
+    type: String,
+    default: '',
+  },
+
+  profileImagePublicId: {
+    type: String,
+    default: '',
+  },
 });
 
 const Designer = mongoose.model('Designer', designerSchema);
