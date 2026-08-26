@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>HOMIZ | Dashboard</title>
+</head>
+<body>
+
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="dashboard-page">
+
+    <section class="dashboard-top">
+      <div>
+        <p class="dashboard-kicker">DESIGNER DASHBOARD</p>
+
+        <h1>
+          Welcome, <%= designer.user.name %>
+        </h1>
+
+        <p class="dashboard-intro">
+          Manage your profile and projects.
+        </p>
+      </div>
+
+      <a href="/projects/new" class="dashboard-add-button">
+        Add Project
+        <span>+</span>
+      </a>
+    </section>
+
+    <section class="dashboard-profile">
+
+      <div class="dashboard-profile-image">
+        <% if (designer.profileImageUrl) { %>
+          <img
+            src="<%= designer.profileImageUrl %>"
+            alt="<%= designer.user.name %>"
+          >
+        <% } else { %>
+          <div class="dashboard-profile-placeholder">
+            <%= designer.user.name.charAt(0).toUpperCase() %>
+          </div>
+        <% } %>
+      </div>
+
+      <div class="dashboard-profile-info">
+
+        <p class="dashboard-kicker">
+          YOUR PROFILE
+        </p>
+
+        <h2>
+          <%= designer.user.name %>
+        </h2>
+
+        <p>
+          <%= designer.bio || 'No bio added yet.' %>
+        </p>
+
+        <div class="dashboard-specialization">
+          <span>Specialization</span>
+          <strong>
+            <%= designer.specialization || 'Not added yet' %>
+          </strong>
+        </div>
+
+      </div>
+
+      <a
+        href="/designers/profile/edit"
+        class="dashboard-profile-button"
+      >
+        Edit Profile
+        <span>→</span>
+      </a>
+
+    </section>
+
+    <section class="dashboard-stats">
+
+      <div class="dashboard-stat">
+        <span>MY PROJECTS</span>
+        <strong>
+          <%= projects ? projects.length : 0 %>
+        </strong>
+      </div>
+
+    </section>
+
+    <section class="dashboard-projects">
+
+      <div class="dashboard-section-header">
+
+        <div>
+          <p class="dashboard-kicker">
+            YOUR WORK
+          </p>
+
+          <h2>
+            My Projects
+          </h2>
+        </div>
+
+      </div>
+
+      <% if (projects && projects.length > 0) { %>
+
+        <div class="dashboard-projects-grid">
+
+          <% projects.forEach(function(project) { %>
+
+            <article class="dashboard-project-card">
+
+              <div class="dashboard-project-image">
+
+                <% if (project.mainImage && project.mainImage.url) { %>
+
+                  <img
+                    src="<%= project.mainImage.url %>"
+                    alt="<%= project.title %>"
+                  >
+
+                <% } else { %>
+
+                  <img
+                    src="/stylesheets/images/blackChair.png"
+                    alt="Project image"
+                  >
+
+                <% } %>
+
+              </div>
+
+              <div class="dashboard-project-info">
+
+                <p class="dashboard-project-category">
+                  <%= project.category %>
+                </p>
+
+                <h3>
+                  <%= project.title %>
+                </h3>
+
+                <p class="dashboard-project-description">
+                  <%= project.description %>
+                </p>
+
+                <div class="dashboard-project-location">
+                  <i data-lucide="map-pin"></i>
+                  <span>
+                    <%= project.location %>
+                  </span>
+                </div>
+
+                <div class="dashboard-project-actions">
+
+                  <a
+                    href="/projects/<%= project._id %>"
+                    class="dashboard-view-button"
+                  >
+                    View
+                  </a>
+
+                  <a
+                    href="/projects/<%= project._id %>/edit"
+                    class="dashboard-edit-button"
+                  >
+                    Edit
+                  </a>
+
+                  <form
+                    action="/projects/<%= project._id %>?_method=DELETE"
+                    method="POST"
+                  >
+                    <button
+                      type="submit"
+                      class="dashboard-delete-button"
+                    >
+                      Delete
+                    </button>
+                  </form>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          <% }); %>
+
+        </div>
+
+      <% } else { %>
+
+        <div class="dashboard-empty">
+
+          <div class="dashboard-empty-icon">
+            <i data-lucide="folder-plus"></i>
+          </div>
+
+          <h3>
+            No projects yet
+          </h3>
+
+          <p>
+            Start building your portfolio by adding your first project.
+          </p>
+
+          <a
+            href="/projects/new"
+            class="dashboard-add-button"
+          >
+            Add Your First Project
+            <span>+</span>
+          </a>
+
+        </div>
+
+      <% } %>
+
+    </section>
+
+  </main>
+
+  <%- include('../partials/_footer.ejs') %>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+
+  <title><%= designer.user.name %> | HOMIZ</title>
+</head>
+
+<body>
+
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main>
+
+    <section class="designer-profile-page">
+
+      <div class="designer-profile-image">
+
+        <% if (designer.profileImageUrl) { %>
+
+          <img
+            src="<%= designer.profileImageUrl %>"
+            alt="<%= designer.user.name %>'s profile"
+          >
+
+        <% } else { %>
+
+          <div class="designer-profile-placeholder">
+            <%= designer.user.name.charAt(0).toUpperCase() %>
+          </div>
+
+        <% } %>
+
+      </div>
+
+      <div class="designer-profile-info">
+
+        <p class="designer-profile-kicker">
+          HOMIZ DESIGNER
+        </p>
+
+        <h1>
+          <%= designer.user.name %>
+        </h1>
+
+        <p class="designer-profile-username">
+          @<%= designer.user.username %>
+        </p>
+
+        <div class="designer-profile-specialization">
+
+          <span>SPECIALIZATION</span>
+
+          <strong>
+            <%= designer.specialization || 'Interior Designer' %>
+          </strong>
+
+        </div>
+
+        <div class="designer-profile-bio">
+
+          <span>ABOUT THE DESIGNER</span>
+
+          <p>
+            <%= designer.bio || 'No bio available.' %>
+          </p>
+
+        </div>
+
+        <div class="designer-profile-actions">
+
+          <a
+            href="/designers"
+            class="project-button"
+          >
+            Back to Designers
+            <span>←</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>

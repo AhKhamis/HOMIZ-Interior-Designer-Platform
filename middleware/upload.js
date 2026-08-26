@@ -8,17 +8,14 @@ const allowedImageTypes = new Set([
 
 const upload = multer({
   storage: multer.memoryStorage(),
-
   limits: {
     fields: 10,
     fileSize: 5 * 1024 * 1024,
   },
-
   fileFilter: (req, file, done) => {
     if (!allowedImageTypes.has(file.mimetype)) {
       return done(new Error('Please choose a JPG, PNG, or WebP image.'));
     }
-
     return done(null, true);
   },
 });
@@ -28,8 +25,7 @@ const uploadSingleImage = (req, res, next) => {
     if (error) {
       return res.status(400).send(error.message);
     }
-
-    return next();
+    next();
   });
 };
 

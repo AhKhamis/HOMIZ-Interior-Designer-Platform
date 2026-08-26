@@ -3,34 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Designer Edit Page</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/partials.css">
+    <title>Edit Designer Profile</title>
 </head>
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-<h1>Edit Designer Profile</h1>
+    <main>
+        <section class="new-project">
 
-<form action="/designers/profile?_method=PUT" method="POST">
+            <div class="new-project-header">
+                <p class="new-project-kicker">EDIT PROFILE</p>
+                <h1>Update Your Profile</h1>
+                <p class="new-project-intro">
+                    Update your information and profile image.
+                </p>
+            </div>
 
-  <label for="bio">Bio</label>
-  <textarea id="bio" name="bio"><%= designer.bio || '' %></textarea>
+            <form
+                action="/designers/profile?_method=PUT"
+                method="POST"
+                enctype="multipart/form-data"
+                class="new-project-form"
+            >
 
-  <label for="specialization">Specialization</label>
-  <input
-    type="text"
-    id="specialization"
-    name="specialization"
-    value="<%= designer.specialization || '' %>"
-  >
+                <div class="new-project-field">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="<%= designer.user.name || '' %>"
+                        required
+                    >
+                </div>
 
-  <button type="submit">Save Profile</button>
+                <div class="new-project-field">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value="<%= designer.user.username || '' %>"
+                        required
+                    >
+                </div>
 
-</form>
+                <div class="new-project-field">
+                    <label for="specialization">Specialization</label>
+                    <input
+                        type="text"
+                        id="specialization"
+                        name="specialization"
+                        value="<%= designer.specialization || '' %>"
+                    >
+                </div>
 
-<a href="/projects/dashboard">Back to Dashboard</a>
-    
+                <div class="new-project-field">
+                    <label for="bio">Bio</label>
+                    <textarea
+                        id="bio"
+                        name="bio"
+                    ><%= designer.bio || '' %></textarea>
+                </div>
+
+                <div class="new-project-images">
+
+                    <div class="new-project-section-title">
+                        <p>PROFILE IMAGE</p>
+                        <h2>Update your profile image</h2>
+                        <span>JPG, PNG or WebP. Maximum size 5MB.</span>
+                    </div>
+
+                    <% if (designer.profileImageUrl) { %>
+                        <div class="edit-project-main">
+                            <img
+                                src="<%= designer.profileImageUrl %>"
+                                alt="Current profile image"
+                            >
+                            <span class="edit-project-image-label">
+                                CURRENT IMAGE
+                            </span>
+                        </div>
+                    <% } %>
+
+                    <label for="image" class="new-project-upload">
+                        <span class="new-project-upload-icon">+</span>
+                        <strong>Choose New Profile Image</strong>
+                        <small>Leave empty to keep your current image</small>
+                    </label>
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept=".jpg,.jpeg,.png,.webp"
+                    >
+
+                    <div
+                        id="profile-preview"
+                        class="new-project-preview"
+                    ></div>
+
+                </div>
+
+                <div class="new-project-actions">
+
+                    <a
+                        href="/projects/dashboard"
+                        class="new-project-cancel"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="new-project-submit"
+                    >
+                        Save Changes
+                        <span>←</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+    </main>
+
+    <script>
+        const imageInput = document.getElementById('image');
+        const preview = document.getElementById('profile-preview');
+
+        imageInput.addEventListener('change', () => {
+            preview.innerHTML = '';
+
+            const file = imageInput.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const container = document.createElement('div');
+            container.className = 'new-project-preview-item';
+
+            const image = document.createElement('img');
+            image.src = URL.createObjectURL(file);
+            image.alt = 'New profile preview';
+
+            container.appendChild(image);
+            preview.appendChild(container);
+        });
+    </script>
+
 </body>
 </html>

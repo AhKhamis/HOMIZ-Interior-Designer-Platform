@@ -1,10 +1,27 @@
-/* eslint-disable no-empty */
-/* eslint-disable no-console */
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Designer = require('../models/designer');
+const cloudinary = require('../config/cloudinary');
 
-const SALT_ROUDS = 10;
+const SALT_ROUNDS = 10;
+
+const uploadImage = (imageBuffer) =>
+  new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        resource_type: 'image',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+      },
+      (error, result) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      }
+    );
+
+    uploadStream.end(imageBuffer);
+  });
 
 const signup = async (req, res) => {
   res.render('auth/sign-up.ejs');
@@ -12,34 +29,57 @@ const signup = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    // verify if the username alrady exists
-    const userInDatabase = await User.findOne({ username: req.body.username });
-    // if the user exists send error msg
+    console.log('REQ BODY:', req.body);
+    console.log('REQ FILE:', req.file);
+
+    if (!req.body) {
+      return res.send('No form data received');
+    }
+
+    const userInDatabase = await User.findOne({
+      username: req.body.username,
+    });
+
     if (userInDatabase) {
-      return res.send('Invalid input');
+      return res.send('Username already exists');
     }
-    // else send error msg
+
     if (req.body.password !== req.body.confirmPassword) {
-      return res.send('Invalid input');
+      return res.send('Passwords do not match');
     }
-    // Encrypt the password
-    const hashedPassword = bcrypt.hashSync(req.body.password, SALT_ROUDS);
-    req.body.password = hashedPassword;
 
-    // else lets check if the password match
-    // if password matches create the new user
-    const user = await User.create(req.body);
+    if (!req.file) {
+      return res.send('Please choose a profile image');
+    }
 
-  await Designer.create({
-    user: user._id,
-  });
+    const hashedPassword = bcrypt.hashSync(
+      req.body.password,
+      SALT_ROUNDS
+    );
 
-  req.session.user = {
-    username: user.username,
-    _id: user._id,
-    role: user.role,
-  };
-    // redirect to homepage
+    const user = await User.create({
+      name: req.body.name,
+      username: req.body.username,
+      password: hashedPassword,
+      role: 'designer',
+    });
+
+    const imageResult = await uploadImage(req.file.buffer);
+
+    await Designer.create({
+      user: user._id,
+      bio: req.body.bio || '',
+      specialization: req.body.specialization || '',
+      profileImageUrl: imageResult.secure_url,
+      profileImagePublicId: imageResult.public_id,
+    });
+
+    req.session.user = {
+      username: user.username,
+      _id: user._id,
+      role: user.role,
+    };
+
     req.session.save(() => {
       res.redirect('/');
     });
@@ -54,22 +94,24 @@ const signin = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const userInDatabase = await User.findOne({ username: req.body.username });
+  const userInDatabase = await User.findOne({
+    username: req.body.username,
+  });
 
-  // only allow users that exist to login
   if (!userInDatabase) {
     return res.send('Invalid credentials');
   }
 
-  // make sure the user's password matches the req.body.password
-  if (!bcrypt.compareSync(req.body.password, userInDatabase.password)) {
+  if (
+    !bcrypt.compareSync(
+      req.body.password,
+      userInDatabase.password
+    )
+  ) {
     return res.send('Invalid credentials');
   }
 
-  // There is a user AND they had the correct password. Time to make a session!
-  // Avoid storing the password, even in hashed format, in the session
-  // If there is other data you want to save to `req.session.user`, do so here!
-    req.session.user = {
+  req.session.user = {
     username: userInDatabase.username,
     _id: userInDatabase._id,
     role: userInDatabase.role,

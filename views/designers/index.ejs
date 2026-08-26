@@ -3,44 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <link rel="stylesheet" href="/stylesheets/partials.css" />
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
   <title>Designers</title>
 </head>
 <body>
-
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Designers</h1>
+  <main>
+    <section class="projects-section designers-section">
+      <div class="projects-header">
+        <div>
+          <p class="projects-title-kicker">HOMIZ DESIGNERS</p>
+          <h1 class="designers-page-title">Meet Our Designers</h1>
+          <p class="designers-page-intro">
+            Discover talented interior designers and explore their creative styles.
+          </p>
+        </div>
+      </div>
 
-  <% designers.forEach(designer => { %>
+      <div class="designers-grid">
+        <% designers.forEach(designer => { %>
+          <article class="designer-card">
+            <div class="designer-image">
+              <% if (designer.profileImageUrl) { %>
+                <img
+                  src="<%= designer.profileImageUrl %>"
+                  alt="<%= designer.user.name %>'s profile"
+                >
+              <% } else { %>
+                <div class="designer-image-placeholder">
+                  <%= designer.user.name.charAt(0).toUpperCase() %>
+                </div>
+              <% } %>
+            </div>
 
-    <div>
+            <div class="designer-info">
+              <p class="designer-kicker">INTERIOR DESIGNER</p>
 
-      <% if (designer.profileImageUrl) { %>
+              <h2>
+                <%= designer.user.name %>
+              </h2>
 
-        <img
-          src="<%= designer.profileImageUrl %>"
-          alt="<%= designer.user.name %>'s profile"
-          width="250"
-        />
+              <p class="designer-specialization">
+                <%= designer.specialization || 'Interior Designer' %>
+              </p>
 
-      <% } %>
+              <p class="designer-bio">
+                <%= designer.bio || 'No bio available.' %>
+              </p>
 
-      <h2><%= designer.user.name %></h2>
+              <a
+                href="/designers/<%= designer._id %>"
+                class="project-button designer-button"
+              >
+                View Profile
+                <span>←</span>
+              </a>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </section>
+  </main>
 
-      <p>
-        <strong>Specialization:</strong>
-        <%= designer.specialization || 'Not specified' %>
-      </p>
-
-      <p>
-        <%= designer.bio || 'No bio available.' %>
-      </p>
-
-    </div>
-
-  <% }) %>
-
+  <%- include('../partials/_footer.ejs') %>
 </body>
 </html>

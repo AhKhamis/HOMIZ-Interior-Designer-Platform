@@ -1,29 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Sign Up</title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/partials.css">
+  <title>Sign Up</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
 
-    <h1>Create a new account!</h1>
-    <form action="/auth/sign-up" method="POST">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required />
+  <main>
+    <section class="new-project">
+      <div class="new-project-header">
+        <p class="new-project-kicker">CREATE ACCOUNT</p>
+        <h1>Join HOMIZ</h1>
+        <p class="new-project-intro">
+          Create your designer account and build your professional profile.
+        </p>
+      </div>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
+      <form
+        action="/auth/sign-up"
+        method="POST"
+        enctype="multipart/form-data"
+        class="new-project-form"
+      >
+        <div class="new-project-field">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          >
+        </div>
 
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" required />
+        <div class="new-project-field">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Choose a username"
+            required
+          >
+        </div>
 
-      <button type="submit">Sign up</button>
-    </form>
-  </body>
+        <div class="new-project-fields-row">
+          <div class="new-project-field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            >
+          </div>
+
+          <div class="new-project-field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="new-project-field">
+          <label for="specialization">Specialization</label>
+          <input
+            type="text"
+            id="specialization"
+            name="specialization"
+            placeholder="e.g. Residential Interior Design"
+          >
+        </div>
+
+        <div class="new-project-field">
+          <label for="bio">Bio</label>
+          <textarea
+            id="bio"
+            name="bio"
+            placeholder="Tell clients a little about yourself..."
+          ></textarea>
+        </div>
+
+        <div class="new-project-images">
+          <div class="new-project-section-title">
+            <p>PROFILE IMAGE</p>
+            <h2>Upload your profile image</h2>
+            <span>JPG, PNG or WebP. Maximum size 5MB.</span>
+          </div>
+
+          <label for="image" class="new-project-upload">
+            <span class="new-project-upload-icon">+</span>
+            <strong>Choose Profile Image</strong>
+            <small>Click here to select an image</small>
+          </label>
+
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept=".jpg,.jpeg,.png,.webp"
+            required
+          >
+
+          <div id="profile-preview" class="new-project-preview"></div>
+        </div>
+
+        <div class="new-project-actions">
+          <button
+            type="submit"
+            class="new-project-submit"
+          >
+            Create Account
+            <span>←</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('profile-preview');
+
+    imageInput.addEventListener('change', () => {
+      preview.innerHTML = '';
+
+      const file = imageInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      const container = document.createElement('div');
+      container.className = 'new-project-preview-item';
+
+      const image = document.createElement('img');
+      image.src = URL.createObjectURL(file);
+      image.alt = 'Profile preview';
+
+      container.appendChild(image);
+      preview.appendChild(container);
+    });
+  </script>
+</body>
 </html>
