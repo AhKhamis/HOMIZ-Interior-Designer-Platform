@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   username: {
     type: String,
     required: true,
@@ -15,14 +16,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   role: {
     type: String,
     enum: ['designer', 'admin'],
     default: 'designer',
   },
 });
-// initial the model
 
+// initial the model
 const User = mongoose.model('User', userSchema);
 
 // export it

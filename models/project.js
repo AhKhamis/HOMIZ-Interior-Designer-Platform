@@ -1,63 +1,71 @@
 const mongoose = require('mongoose');
 
-const projectSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String,
-    required: true,
-  },
-
-  mainImage: {
-    url: {
+const projectSchema = new mongoose.Schema(
+  {
+    title: {
       type: String,
-      default: '',
+      required: true,
     },
 
-    publicId: {
+    description: {
       type: String,
-      default: '',
+      required: true,
     },
-  },
 
-  galleryImages: [
-    {
+    category: {
+      type: String,
+      required: true,
+    },
+
+    location: {
+      type: String,
+      required: true,
+    },
+
+    mainImage: {
       url: {
         type: String,
-        required: true,
+        default: '',
       },
 
       publicId: {
         type: String,
-        required: true,
+        default: '',
       },
     },
-  ],
 
-  designer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Designer',
-    required: true,
-  },
+    galleryImages: [
+      {
+        url: {
+          type: String,
+          required: true,
+        },
 
-  services: [
-    {
+        publicId: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+
+    designer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Service',
+      ref: 'Designer',
+      required: true,
     },
-  ],
-});
 
-const Project = mongoose.model('Project', projectSchema);
+    services: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Service',
+      },
+    ],
+  }
+);
+
+const Project = mongoose.model(
+  'Project',
+  projectSchema
+);
 
 module.exports = Project;

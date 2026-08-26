@@ -3,59 +3,223 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <link rel="stylesheet" href="/stylesheets/partials.css" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <title>Projects</title>
+  <link
+    rel="stylesheet"
+    href="/stylesheets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/stylesheets/partials.css"
+  >
+
+  <!-- Lucide Icons -->
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <title>HOMIZ | Projects</title>
+
 </head>
+
 
 <body>
 
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Projects</h1>
 
-  <% projects.forEach(project => { %>
+  <main>
 
-    <div>
+    <!-- =====================================================
+         PROJECTS
+    ====================================================== -->
 
-      <% if (project.mainImage && project.mainImage.url) { %>
+    <section
+      class="projects-section"
+      id="projects"
+    >
 
-        <img
-          src="<%= project.mainImage.url %>"
-          alt="<%= project.title %>"
-          width="300"
-        >
+      <!-- Projects header -->
+
+      <div class="projects-header">
+
+        <div class="projects-title">
+
+          <p>
+            OUR WORK
+          </p>
+
+          <h2>
+            HOMIZ Projects
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           PROJECTS GRID
+      ====================================================== -->
+
+      <% if (projects && projects.length > 0) { %>
+
+        <div class="projects-grid">
+
+          <% projects.forEach((project) => { %>
+
+            <article class="project-card">
+
+
+              <!-- =================================================
+                   PROJECT INFORMATION
+              ================================================== -->
+
+              <div class="project-info">
+
+                <h3>
+                  <%= project.title %>
+                </h3>
+
+
+                <p>
+                  <%= project.description %>
+                </p>
+
+
+                <!-- Designer -->
+
+                <div class="project-designer">
+
+                  <span>
+                    Designer:
+                  </span>
+
+
+                  <% if (
+                    project.designer &&
+                    project.designer.user
+                  ) { %>
+
+                    <strong>
+                      <%= project.designer.user.name %>
+                    </strong>
+
+                  <% } else { %>
+
+                    <strong>
+                      HOMIZ Designer
+                    </strong>
+
+                  <% } %>
+
+                </div>
+
+
+                <!-- View button -->
+
+                <a
+                  href="/projects/<%= project._id %>"
+                  class="project-button"
+                >
+
+                  View
+
+                  <span>
+                    ←
+                  </span>
+
+                </a>
+
+              </div>
+
+
+              <!-- =================================================
+                   MAIN PROJECT IMAGE
+              ================================================== -->
+
+              <div class="project-image">
+
+                <% if (
+                  project.mainImage &&
+                  project.mainImage.url
+                ) { %>
+
+                  <img
+                    src="<%= project.mainImage.url %>"
+                    alt="<%= project.title %>"
+                  >
+
+                <% } else { %>
+
+                  <img
+                    src="/stylesheets/images/blackChair.png"
+                    alt="Project image"
+                  >
+
+                <% } %>
+
+              </div>
+
+            </article>
+
+          <% }) %>
+
+        </div>
+
+
+      <% } else { %>
+
+
+        <!-- =================================================
+             NO PROJECTS
+        ================================================== -->
+
+        <div class="no-projects">
+
+          <h3>
+            No projects yet
+          </h3>
+
+          <p>
+            New interior design projects will appear here.
+          </p>
+
+        </div>
+
 
       <% } %>
 
-      <h2><%= project.title %></h2>
+    </section>
 
-      <p><%= project.description %></p>
+  </main>
 
-      <a href="/projects/<%= project._id %>">
-        View
-      </a>
 
-    </div>
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
-  <% }) %>
+  <%- include('../partials/_footer.ejs') %>
 
-  <br>
-  <br>
 
-  <a href="/projects/new">
-    Add Project
-  </a>
+  <!-- =====================================================
+       LUCIDE INITIALIZATION
+  ====================================================== -->
 
-  <br>
-
-  <a href="/">
-    Back to Home
-  </a>
+  <script>
+    lucide.createIcons();
+  </script>
 
 </body>
 

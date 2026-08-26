@@ -3,100 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/partials.css">
-
-  <title><%= project.title %></title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>HOMIZ | <%= project.title %></title>
 </head>
 <body>
 
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1><%= project.title %></h1>
+  <main>
+    <section class="project-details">
 
-  <h2>Main Image</h2>
+      <div class="project-details-header">
+        <p>HOMIZ PROJECT</p>
+        <h1><%= project.title %></h1>
 
-  <% if (project.mainImage && project.mainImage.url) { %>
+        <div class="project-meta">
+          <span><%= project.category %></span>
+          <span><%= project.location %></span>
+        </div>
+      </div>
 
-    <img
-      src="<%= project.mainImage.url %>"
-      alt="<%= project.title %>"
-      style="width: 600px; height: auto;"
-    >
+      <div class="project-main-image">
+        <% if (project.mainImage && project.mainImage.url) { %>
+          <img
+            src="<%= project.mainImage.url %>"
+            alt="<%= project.title %>"
+          >
+        <% } else { %>
+          <div class="project-no-image">
+            No main image
+          </div>
+        <% } %>
+      </div>
 
-  <% } else { %>
+      <% if (project.galleryImages && project.galleryImages.length > 0) { %>
+        <div class="project-gallery-thumbnails">
+          <% project.galleryImages.forEach((image, index) => { %>
+            <div class="project-gallery-thumbnail">
+              <img
+                src="<%= image.url %>"
+                alt="<%= project.title %> image <%= index + 1 %>"
+              >
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
 
-    <p>No main image.</p>
+      <div class="project-details-content">
 
-  <% } %>
+        <div class="project-description">
+          <p class="project-label">ABOUT THE PROJECT</p>
 
+          <h2><%= project.title %></h2>
 
-  <% if (project.galleryImages && project.galleryImages.length > 0) { %>
+          <p>
+            <%= project.description %>
+          </p>
+        </div>
 
-    <h2>Project Gallery</h2>
+        <% if (project.services && project.services.length > 0) { %>
+          <div class="project-services">
+            <p class="project-label">SERVICES</p>
 
-    <% project.galleryImages.forEach((image, index) => { %>
-
-      <div>
-
-        <img
-          src="<%= image.url %>"
-          alt="<%= project.title %> image <%= index + 1 %>"
-          style="width: 300px; height: auto;"
-        >
+            <div class="services-list">
+              <% project.services.forEach(service => { %>
+                <span class="service-tag">
+                  <%= service.name %>
+                </span>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
 
       </div>
 
-    <% }) %>
+      <div class="project-details-actions">
+        <a
+          href="/projects"
+          class="project-button"
+        >
+          Back to Projects
+          <span>←</span>
+        </a>
+      </div>
 
-  <% } else { %>
+    </section>
+  </main>
 
-    <p>No gallery images.</p>
+  <%- include('../partials/_footer.ejs') %>
 
-  <% } %>
-
-
-  <p><strong>Description:</strong> <%= project.description %></p>
-
-  <p><strong>Category:</strong> <%= project.category %></p>
-
-  <p><strong>Location:</strong> <%= project.location %></p>
-
-
-  <h2>Services</h2>
-
-  <ul>
-
-    <% project.services.forEach(service => { %>
-
-      <li><%= service.name %></li>
-
-    <% }) %>
-
-  </ul>
-
-
-  <a href="/projects/<%= project._id %>/edit">
-    Edit
-  </a>
-
-
-  <form
-    action="/projects/<%= project._id %>?_method=DELETE"
-    method="POST"
-  >
-
-    <button type="submit">
-      Delete
-    </button>
-
-  </form>
-
-
-  <a href="/projects" class="button">
-    Back to Projects
-  </a>
+  <script>
+    lucide.createIcons();
+  </script>
 
 </body>
 </html>

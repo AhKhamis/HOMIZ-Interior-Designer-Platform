@@ -3,157 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/partials.css">
-
-  <title>Edit Project</title>
+  <title>HOMIZ | Edit Project</title>
 </head>
-
 <body>
 
-  <%- include('../partials/_navbar.ejs') %>
+  <main>
 
-  <h1>Edit Project</h1>
+    <section class="new-project">
 
-  <form
-    action="/projects/<%= project._id %>?_method=PUT"
-    method="POST"
-    enctype="multipart/form-data"
-  >
+      <div class="new-project-header">
+        <p class="new-project-kicker">
+          DESIGNER DASHBOARD
+        </p>
 
-    <label>Title</label>
+        <h1>
+          Edit Project
+        </h1>
 
-    <input
-      type="text"
-      name="title"
-      value="<%= project.title %>"
-      required
-    >
-
-    <label>Description</label>
-
-    <textarea
-      name="description"
-      required
-    ><%= project.description %></textarea>
-
-    <label>Category</label>
-
-    <input
-      type="text"
-      name="category"
-      value="<%= project.category %>"
-      required
-    >
-
-    <label>Location</label>
-
-    <input
-      type="text"
-      name="location"
-      value="<%= project.location %>"
-      required
-    >
-
-    <label>Services</label>
-
-    <% services.forEach(service => { %>
-
-      <div>
-
-        <input
-          type="checkbox"
-          name="services"
-          value="<%= service._id %>"
-          <%= project.services.some(
-            projectService =>
-              projectService._id.toString() === service._id.toString()
-          ) ? 'checked' : '' %>
-        >
-
-        <label>
-          <%= service.name %>
-        </label>
-
+        <p class="new-project-intro">
+          Update your project information and images.
+        </p>
       </div>
 
-    <% }) %>
-
-
-    <h2>Current Main Image</h2>
-
-    <% if (project.mainImage && project.mainImage.url) { %>
-
-      <img
-        src="<%= project.mainImage.url %>"
-        alt="<%= project.title %>"
-        width="300"
+      <form
+        action="/projects/<%= project._id %>?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
+        class="new-project-form"
       >
 
-    <% } else { %>
+        <div class="new-project-field">
+          <label for="title">
+            Project Title
+          </label>
 
-      <p>No main image.</p>
-
-    <% } %>
-
-
-    <h2>Current Gallery</h2>
-
-    <% if (project.galleryImages && project.galleryImages.length > 0) { %>
-
-      <% project.galleryImages.forEach((image, index) => { %>
-
-        <div>
-
-          <img
-            src="<%= image.url %>"
-            alt="<%= project.title %> image <%= index + 1 %>"
-            width="200"
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value="<%= project.title %>"
+            required
           >
+        </div>
+
+        <div class="new-project-field">
+          <label for="description">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            name="description"
+            required
+          ><%= project.description %></textarea>
+        </div>
+
+        <div class="new-project-fields-row">
+
+          <div class="new-project-field">
+            <label for="category">
+              Category
+            </label>
+
+            <input
+              type="text"
+              id="category"
+              name="category"
+              value="<%= project.category %>"
+              required
+            >
+          </div>
+
+          <div class="new-project-field">
+            <label for="location">
+              Location
+            </label>
+
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value="<%= project.location %>"
+              required
+            >
+          </div>
 
         </div>
 
-      <% }) %>
+        <div class="new-project-services">
 
-    <% } else { %>
+          <div class="new-project-section-title">
+            <p>
+              SERVICES
+            </p>
 
-      <p>No gallery images.</p>
+            <h2>
+              Project Services
+            </h2>
+          </div>
 
-    <% } %>
+          <div class="new-project-services-grid">
 
+            <% services.forEach(service => { %>
 
-    <h2>Replace Images</h2>
+              <label class="new-project-service">
 
-    <p>
-      Select up to 5 new images. Choose one as the new main image.
-    </p>
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="<%= service._id %>"
+                  <%= project.services.some(
+                    projectService =>
+                      projectService._id.toString() === service._id.toString()
+                  ) ? 'checked' : '' %>
+                >
 
-    <input
-      type="file"
-      name="images"
-      id="images"
-      accept=".jpg,.jpeg,.png,.webp"
-      multiple
-    >
+                <span class="new-project-service-box">
 
-    <div id="image-preview"></div>
+                  <span class="new-project-check">
+                    ✓
+                  </span>
 
+                  <span>
+                    <%= service.name %>
+                  </span>
 
-    <button type="submit">
-      Update Project
-    </button>
+                </span>
 
-  </form>
+              </label>
 
+            <% }) %>
 
-  <a
-    href="/projects/<%= project._id %>"
-    class="button"
-  >
-    Back
-  </a>
+          </div>
 
+        </div>
+
+        <div class="edit-project-images">
+
+          <div class="new-project-section-title">
+
+            <p>
+              CURRENT IMAGES
+            </p>
+
+            <h2>
+              Project Gallery
+            </h2>
+
+          </div>
+
+          <div class="edit-project-current">
+
+            <div class="edit-project-main">
+
+              <span class="edit-project-image-label">
+                Main Image
+              </span>
+
+              <% if (project.mainImage && project.mainImage.url) { %>
+
+                <img
+                  src="<%= project.mainImage.url %>"
+                  alt="<%= project.title %>"
+                >
+
+              <% } else { %>
+
+                <div class="edit-project-no-image">
+                  No main image
+                </div>
+
+              <% } %>
+
+            </div>
+
+            <% if (
+              project.galleryImages &&
+              project.galleryImages.length > 0
+            ) { %>
+
+              <div class="edit-project-gallery">
+
+                <% project.galleryImages.forEach((image, index) => { %>
+
+                  <div class="edit-project-gallery-item">
+
+                    <img
+                      src="<%= image.url %>"
+                      alt="<%= project.title %> image <%= index + 1 %>"
+                    >
+
+                    <span>
+                      Gallery Image
+                    </span>
+
+                  </div>
+
+                <% }) %>
+
+              </div>
+
+            <% } %>
+
+          </div>
+
+        </div>
+
+        <div class="new-project-images">
+
+          <div class="new-project-section-title">
+
+            <p>
+              REPLACE IMAGES
+            </p>
+
+            <h2>
+              Upload New Images
+            </h2>
+
+            <span>
+              Select up to 5 new images. Choose one as the new main image.
+            </span>
+
+          </div>
+
+          <input
+            type="file"
+            name="images"
+            id="images"
+            accept=".jpg,.jpeg,.png,.webp"
+            multiple
+          >
+
+          <label
+            for="images"
+            class="new-project-upload"
+          >
+
+            <span class="new-project-upload-icon">
+              +
+            </span>
+
+            <strong>
+              Choose New Project Images
+            </strong>
+
+            <small>
+              JPG, JPEG, PNG or WEBP
+            </small>
+
+          </label>
+
+          <div
+            id="image-preview"
+            class="new-project-preview"
+          ></div>
+
+        </div>
+
+        <div class="new-project-actions">
+
+          <a
+            href="/projects/<%= project._id %>"
+            class="new-project-cancel"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="new-project-submit"
+          >
+            Update Project
+            <span>←</span>
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
 
   <script>
 
@@ -167,11 +300,8 @@
       const files = Array.from(imagesInput.files);
 
       if (files.length > 5) {
-
         alert('You can select up to 5 images.');
-
         imagesInput.value = '';
-
         return;
       }
 
@@ -179,24 +309,30 @@
 
         const container = document.createElement('div');
 
+        container.className = 'new-project-preview-item';
+
         const image = document.createElement('img');
 
         image.src = URL.createObjectURL(file);
-        image.width = 200;
+        image.alt = `New project image ${index + 1}`;
 
         const label = document.createElement('label');
+
+        label.className = 'new-project-main-image';
 
         const radio = document.createElement('input');
 
         radio.type = 'radio';
         radio.name = 'mainImageIndex';
         radio.value = index;
+        radio.required = true;
+
+        const text = document.createElement('span');
+
+        text.textContent = 'Main Image';
 
         label.appendChild(radio);
-
-        label.appendChild(
-          document.createTextNode(' Main Image')
-        );
+        label.appendChild(text);
 
         container.appendChild(image);
         container.appendChild(label);

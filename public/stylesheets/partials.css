@@ -1,17 +1,25 @@
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 #navbar {
   width: min(1100px, calc(100% - 60px));
 
   margin: 25px auto 0;
+
   padding: 10px 0;
 
   background-color: transparent;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   direction: ltr;
 }
+
 
 #navbar .logo img {
   width: 100px;
@@ -21,6 +29,7 @@
   display: block;
 }
 
+
 #navbar .nav-links {
   display: flex;
 
@@ -28,6 +37,7 @@
 
   gap: 30px;
 }
+
 
 #navbar .nav-link {
   text-decoration: none;
@@ -39,9 +49,11 @@
   transition: opacity 0.2s ease;
 }
 
+
 #navbar .nav-link:hover {
   opacity: 0.6;
 }
+
 
 #navbar .auth-links {
   display: flex;
@@ -50,6 +62,7 @@
 
   gap: 10px;
 }
+
 
 #navbar .auth-links .nav-link {
   background-color: #171717;
@@ -60,6 +73,7 @@
 
   border-radius: 9px;
 }
+
 
 #navbar .dashboard-button {
   background-color: #e98b36 !important;
@@ -72,28 +86,579 @@
 }
 
 
-@media (max-width: 700px) {
 
-  #navbar {
-    width: calc(100% - 20px);
+/* =========================================================
+   FOOTER
+========================================================= */
 
-    padding: 15px;
+.site-footer {
+  position: relative;
 
-    flex-wrap: wrap;
+  width: 100%;
 
-    gap: 15px;
+  height: 360px;
+
+  margin-top: 40px;
+
+  margin-bottom: 0;
+
+  background-color: #f2f2f2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   DARK PANEL
+========================================================= */
+
+.footer-dark {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background-color: #202020;
+
+  z-index: 2;
+
+  overflow: hidden;
+
+  /*
+    The right edge is:
+    58% at the top
+    42% at the bottom
+
+    This creates one straight diagonal.
+  */
+
+  clip-path: polygon(
+    0 0,
+    58% 0,
+    42% 100%,
+    0 100%
+  );
+}
+
+
+/* =========================================================
+   WHITE PANEL
+========================================================= */
+
+.footer-white {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background-color: #ffffff;
+
+  z-index: 1;
+
+  /*
+    The left edge is:
+    64% at the top
+    48% at the bottom
+
+    Difference from black panel = 6%
+    at BOTH top and bottom.
+
+    Therefore the gap stays equal.
+  */
+
+  clip-path: polygon(
+    64% 0,
+    100% 0,
+    100% 100%,
+    48% 100%
+  );
+}
+
+
+/* =========================================================
+   DECORATIVE PATTERN
+========================================================= */
+
+.footer-pattern {
+  position: absolute;
+
+  width: 650px;
+
+  height: 650px;
+
+  left: -180px;
+
+  top: -260px;
+
+  border: 3px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 50%;
+
+  transform: rotate(25deg);
+
+  pointer-events: none;
+}
+
+
+.footer-pattern::before {
+  content: '';
+
+  position: absolute;
+
+  width: 470px;
+
+  height: 470px;
+
+  left: 105px;
+
+  top: 90px;
+
+  border: 3px solid rgba(255, 255, 255, 0.055);
+
+  border-radius: 50%;
+}
+
+
+.footer-pattern::after {
+  content: '';
+
+  position: absolute;
+
+  width: 330px;
+
+  height: 330px;
+
+  right: -120px;
+
+  top: 190px;
+
+  border: 3px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 50%;
+}
+
+
+.footer-pattern-two {
+  width: 430px;
+
+  height: 430px;
+
+  left: 300px;
+
+  top: 80px;
+
+  border-color: rgba(255, 255, 255, 0.045);
+
+  transform: rotate(-20deg);
+}
+
+
+/* =========================================================
+   FOOTER NAVIGATION
+========================================================= */
+
+.footer-nav {
+  position: relative;
+
+  z-index: 5;
+
+  width: 440px;
+
+  padding-top: 48px;
+
+  margin-left: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 28px;
+}
+
+
+.footer-nav a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  transition: opacity 0.2s ease;
+}
+
+
+.footer-nav a:hover {
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   DARK CONTENT
+========================================================= */
+
+.footer-dark-content {
+  position: relative;
+
+  z-index: 5;
+
+  width: 430px;
+
+  margin-left: 35px;
+
+  margin-top: 38px;
+
+  text-align: center;
+
+  color: #ffffff;
+}
+
+
+.footer-dark-content p {
+  margin: 0 auto 10px;
+
+  max-width: 400px;
+
+  font-size: 9px;
+
+  line-height: 1.8;
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.footer-socials {
+  position: relative;
+
+  z-index: 5;
+
+  width: 430px;
+
+  margin-left: 35px;
+
+  margin-top: 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+}
+
+
+.footer-social {
+  width: 48px;
+
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background-color: #e98b36;
+
+  color: #171717;
+
+  border-radius: 7px;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.footer-social:hover {
+  transform: translateY(-3px);
+
+  opacity: 0.9;
+}
+
+
+.footer-social svg {
+  width: 22px;
+
+  height: 22px;
+
+  display: block;
+}
+
+
+/* =========================================================
+   WHITE CONTENT
+========================================================= */
+
+.footer-white-content {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 0;
+
+  right: 6%;
+
+  width: 400px;
+
+  height: 100%;
+
+  padding-top: 80px;
+
+  text-align: center;
+}
+
+
+.footer-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   WHITE DESCRIPTION
+========================================================= */
+
+.footer-white-text {
+  max-width: 360px;
+
+  margin: 30px auto 0;
+
+  color: #555555;
+
+  font-size: 10px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .site-footer {
+    height: 350px;
   }
 
-  #navbar .nav-links {
-    order: 3;
+
+  .footer-nav {
+    width: 390px;
+
+    gap: 18px;
+
+    margin-left: 10px;
+  }
+
+
+  .footer-nav a {
+    font-size: 9px;
+  }
+
+
+  .footer-dark-content {
+    width: 390px;
+
+    margin-left: 10px;
+  }
+
+
+  .footer-socials {
+    width: 390px;
+
+    margin-left: 10px;
+  }
+
+
+  .footer-white-content {
+    right: 3%;
+
+    width: 340px;
+
+    padding-top: 75px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .site-footer {
+    height: auto;
+
+    margin-top: 30px;
+
+    overflow: hidden;
+  }
+
+
+  /* Dark */
+
+  .footer-dark {
+    position: relative;
+
+    inset: auto;
 
     width: 100%;
 
-    justify-content: center;
+    height: 350px;
 
-    gap: 15px;
+    clip-path: none;
+
+    border-radius: 18px 18px 0 0;
+  }
+
+
+  /* White */
+
+  .footer-white {
+    position: relative;
+
+    inset: auto;
+
+    width: 100%;
+
+    height: 270px;
+
+    clip-path: none;
+
+    border-radius: 0 0 18px 18px;
+  }
+
+
+  /* Pattern */
+
+  .footer-pattern {
+    width: 500px;
+
+    height: 500px;
+
+    left: -190px;
+
+    top: -180px;
+  }
+
+
+  .footer-pattern-two {
+    width: 330px;
+
+    height: 330px;
+
+    left: 180px;
+
+    top: 120px;
+  }
+
+
+  /* Navigation */
+
+  .footer-nav {
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 30px 20px 0;
+
+    gap: 14px 20px;
 
     flex-wrap: wrap;
+  }
+
+
+  .footer-nav a {
+    font-size: 9px;
+  }
+
+
+  /* Content */
+
+  .footer-dark-content {
+    width: auto;
+
+    margin: 35px 30px 0;
+  }
+
+
+  .footer-dark-content p {
+    max-width: 340px;
+
+    font-size: 9px;
+  }
+
+
+  /* Social */
+
+  .footer-socials {
+    width: 100%;
+
+    margin-left: 0;
+
+    margin-top: 25px;
+
+    justify-content: center;
+  }
+
+
+  .footer-social {
+    width: 44px;
+
+    height: 44px;
+  }
+
+
+  /* White */
+
+  .footer-white-content {
+    position: relative;
+
+    top: auto;
+
+    right: auto;
+
+    width: 100%;
+
+    height: auto;
+
+    padding: 60px 25px 40px;
+  }
+
+
+  .footer-brand-name {
+    font-size: 24px;
+  }
+
+
+  .footer-white-text {
+    max-width: 330px;
+
+    margin-top: 25px;
+
+    font-size: 10px;
   }
 
 }

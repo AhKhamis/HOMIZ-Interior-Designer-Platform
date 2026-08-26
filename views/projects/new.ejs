@@ -3,99 +3,216 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/partials.css">
-
-  <title>New Project</title>
+  <title>HOMIZ | New Project</title>
 </head>
 <body>
 
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Create Project</h1>
+  <main>
 
-  <form
-    action="/projects"
-    method="POST"
-    enctype="multipart/form-data"
-  >
+    <section class="new-project">
 
-    <label>Title</label>
+      <div class="new-project-header">
+        <p class="new-project-kicker">
+          DESIGNER DASHBOARD
+        </p>
 
-    <input
-      type="text"
-      name="title"
-      required
-    >
+        <h1>
+          Create New Project
+        </h1>
 
-    <label>Description</label>
-
-    <textarea
-      name="description"
-      required
-    ></textarea>
-
-    <label>Category</label>
-
-    <input
-      type="text"
-      name="category"
-      required
-    >
-
-    <label>Location</label>
-
-    <input
-      type="text"
-      name="location"
-      required
-    >
-
-    <label>Services</label>
-
-    <% services.forEach(service => { %>
-
-      <div>
-
-        <input
-          type="checkbox"
-          name="services"
-          value="<%= service._id %>"
-        >
-
-        <label>
-          <%= service.name %>
-        </label>
-
+        <p class="new-project-intro">
+          Add a new interior design project to your HOMIZ portfolio.
+        </p>
       </div>
 
-    <% }) %>
+      <form
+        action="/projects"
+        method="POST"
+        enctype="multipart/form-data"
+        class="new-project-form"
+      >
 
-    <label for="images">
-      Project Images
-    </label>
+        <div class="new-project-field">
+          <label for="title">
+            Project Title
+          </label>
 
-    <p>
-      Select 1 to 5 images and choose one as the main image.
-    </p>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter project title"
+            required
+          >
+        </div>
 
-    <input
-      type="file"
-      name="images"
-      id="images"
-      accept=".jpg,.jpeg,.png,.webp"
-      multiple
-      required
-    >
+        <div class="new-project-field">
+          <label for="description">
+            Description
+          </label>
 
-    <div id="image-preview"></div>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Describe the project..."
+            required
+          ></textarea>
+        </div>
 
-    <button type="submit">
-      Create Project
-    </button>
+        <div class="new-project-fields-row">
 
-  </form>
+          <div class="new-project-field">
+            <label for="category">
+              Category
+            </label>
+
+            <input
+              type="text"
+              id="category"
+              name="category"
+              placeholder="e.g. Residential"
+              required
+            >
+          </div>
+
+          <div class="new-project-field">
+            <label for="location">
+              Location
+            </label>
+
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="e.g. Manama, Bahrain"
+              required
+            >
+          </div>
+
+        </div>
+
+        <div class="new-project-services">
+
+          <div class="new-project-section-title">
+            <p>
+              SERVICES
+            </p>
+
+            <h2>
+              What did you provide?
+            </h2>
+          </div>
+
+          <div class="new-project-services-grid">
+
+            <% services.forEach(service => { %>
+
+              <label class="new-project-service">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="<%= service._id %>"
+                >
+
+                <span class="new-project-service-box">
+                  <span class="new-project-check">
+                    ✓
+                  </span>
+                  <span>
+                    <%= service.name %>
+                  </span>
+                </span>
+
+              </label>
+
+            <% }) %>
+
+          </div>
+
+        </div>
+
+        <div class="new-project-images">
+
+          <div class="new-project-section-title">
+
+            <p>
+              PROJECT IMAGES
+            </p>
+
+            <h2>
+              Showcase your work
+            </h2>
+
+            <span>
+              Select 1 to 5 images and choose one as the main image.
+            </span>
+
+          </div>
+
+          <input
+            type="file"
+            name="images"
+            id="images"
+            accept=".jpg,.jpeg,.png,.webp"
+            multiple
+            required
+          >
+
+          <label
+            for="images"
+            class="new-project-upload"
+          >
+            <span class="new-project-upload-icon">
+              +
+            </span>
+
+            <strong>
+              Choose Project Images
+            </strong>
+
+            <small>
+              JPG, JPEG, PNG or WEBP
+            </small>
+          </label>
+
+          <div
+            id="image-preview"
+            class="new-project-preview"
+          ></div>
+
+        </div>
+
+        <div class="new-project-actions">
+
+          <a
+            href="/projects/dashboard"
+            class="new-project-cancel"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="new-project-submit"
+          >
+            Create Project
+            <span>←</span>
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <%- include('../partials/_footer.ejs') %>
 
   <script>
 
@@ -117,13 +234,15 @@
       files.forEach((file, index) => {
 
         const container = document.createElement('div');
+        container.className = 'new-project-preview-item';
 
         const image = document.createElement('img');
 
         image.src = URL.createObjectURL(file);
-        image.width = 200;
+        image.alt = `Project image ${index + 1}`;
 
         const label = document.createElement('label');
+        label.className = 'new-project-main-image';
 
         const radio = document.createElement('input');
 
@@ -132,11 +251,12 @@
         radio.value = index;
         radio.required = true;
 
-        label.appendChild(radio);
+        const text = document.createElement('span');
 
-        label.appendChild(
-          document.createTextNode(' Main Image')
-        );
+        text.textContent = 'Main Image';
+
+        label.appendChild(radio);
+        label.appendChild(text);
 
         container.appendChild(image);
         container.appendChild(label);
