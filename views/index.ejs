@@ -1,58 +1,504 @@
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Home Page</title>
-  </head>
-  <body>
 
-    <%- include('./partials/_navbar.ejs') %>
+<head>
 
-    <% if (user) { %>
+  <meta charset="UTF-8" />
 
-      <h1>Welcome to the app, <%= user.username %>!</h1>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-      <% if (profile && profile.profileImageUrl) { %>
+  <link
+    rel="stylesheet"
+    href="/stylesheets/style.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="/stylesheets/partials.css"
+  />
+
+  <!-- Lucide Icons -->
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <title>HOMIZ | Interior Design</title>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+
+  <%- include('./partials/_navbar.ejs') %>
+
+
+
+  <main>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+
+      <!-- Orange background -->
+
+      <div class="hero-orange">
+
+        <div class="hero-pattern"></div>
+
+
+        <!-- Chair -->
 
         <img
-          src="<%= profile.profileImageUrl %>"
-          alt="<%= profile.user.username %>'s profile"
-          width="250"
+          class="hero-chair"
+          src="/stylesheets/images/blackChair.png"
+          alt="Black interior chair"
         />
+
+
+        <!-- HOMIZ badge -->
+
+        <div class="hero-logo-badge">
+          HOMIZ
+        </div>
+
+
+        <!-- Clients badge -->
+
+        <div class="hero-client-badge">
+
+          <strong>+1k</strong>
+
+          <span>
+            happy<br />
+            clients
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- White content panel -->
+
+      <div class="hero-white">
+
+        <div class="hero-content">
+
+          <div class="hero-script">
+            homiz
+          </div>
+
+          <div class="hero-kicker">
+            HOMIZ INTERIOR DESIGN
+          </div>
+
+          <h1>
+            Interior<br />
+            Designer
+          </h1>
+
+          <p class="hero-description">
+            Transform your space with creative ideas,
+            professional designers and personalized
+            interior solutions.
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              href="/contact"
+              class="hero-text-button"
+            >
+              Free Consultation
+
+              <span>←</span>
+
+            </a>
+
+
+            <a
+              href="/projects"
+              class="hero-primary-button"
+            >
+              Explore Projects
+
+              <span>←</span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section
+      class="services-strip"
+      id="services"
+    >
+
+
+      <!-- Service 1 -->
+
+      <div class="service-item">
+
+        <div class="service-icon">
+
+          <i data-lucide="pen-tool"></i>
+
+        </div>
+
+        <h3>
+          Precision Design
+        </h3>
+
+      </div>
+
+
+
+      <!-- Service 2 -->
+
+      <div class="service-item">
+
+        <div class="service-icon">
+
+          <i data-lucide="git-branch"></i>
+
+        </div>
+
+        <h3>
+          Precise Execution
+        </h3>
+
+      </div>
+
+
+
+      <!-- Service 3 -->
+
+      <div class="service-item">
+
+        <div class="service-icon">
+
+          <i data-lucide="sparkles"></i>
+
+        </div>
+
+        <h3>
+          AI Powered
+        </h3>
+
+      </div>
+
+
+
+      <!-- Service 4 -->
+
+      <div class="service-item">
+
+        <div class="service-icon">
+
+          <i data-lucide="workflow"></i>
+
+        </div>
+
+        <h3>
+          Personalization
+        </h3>
+
+      </div>
+
+
+
+      <!-- Services title -->
+
+      <div class="services-title">
+
+        <p>
+          Services at Home
+        </p>
+
+        <h2>
+          HOMIZ Design
+        </h2>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROJECTS
+    ====================================================== -->
+
+    <section
+      class="projects-section"
+      id="projects"
+    >
+
+
+      <!-- Projects header -->
+
+      <div class="projects-header">
+
+
+        <!-- Project navigation -->
+
+        <div class="projects-arrows">
+
+
+          <% if (currentPage > 1) { %>
+
+            <a
+              href="/?page=<%= currentPage - 1 %>#projects"
+              class="projects-arrow"
+              aria-label="Previous projects"
+            >
+              ←
+            </a>
+
+          <% } else { %>
+
+            <span
+              class="projects-arrow"
+              aria-hidden="true"
+            >
+              ←
+            </span>
+
+          <% } %>
+
+
+
+          <% if (currentPage < totalPages) { %>
+
+            <a
+              href="/?page=<%= currentPage + 1 %>#projects"
+              class="projects-arrow"
+              aria-label="Next projects"
+            >
+              →
+            </a>
+
+          <% } else { %>
+
+            <span
+              class="projects-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+          <% } %>
+
+
+        </div>
+
+
+
+        <!-- Projects title -->
+
+        <div class="projects-title">
+
+          <p>
+            OUR WORK
+          </p>
+
+          <h2>
+            HOMIZ Projects
+          </h2>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =====================================================
+           PROJECTS GRID
+      ====================================================== -->
+
+      <% if (latestProjects && latestProjects.length > 0) { %>
+
+
+        <div class="projects-grid">
+
+
+          <% latestProjects.forEach((project) => { %>
+
+
+            <article class="project-card">
+
+
+              <!-- Project information -->
+
+              <div class="project-info">
+
+
+                <h3>
+                  <%= project.title %>
+                </h3>
+
+
+                <p>
+                  <%= project.description %>
+                </p>
+
+
+                <div class="project-designer">
+
+                  <span>
+                    Designer:
+                  </span>
+
+
+                  <% if (
+                    project.designer &&
+                    project.designer.user
+                  ) { %>
+
+                    <strong>
+                      <%= project.designer.user.username %>
+                    </strong>
+
+                  <% } else { %>
+
+                    <strong>
+                      HOMIZ Designer
+                    </strong>
+
+                  <% } %>
+
+                </div>
+
+
+
+                <a
+                  href="/projects/<%= project._id %>"
+                  class="project-button"
+                >
+                  View
+
+                  <span>←</span>
+
+                </a>
+
+
+              </div>
+
+
+
+              <!-- Main project image -->
+
+              <div class="project-image">
+
+
+                <% if (
+                  project.mainImage &&
+                  project.mainImage.url
+                ) { %>
+
+
+                  <img
+                    src="<%= project.mainImage.url %>"
+                    alt="<%= project.title %>"
+                  />
+
+
+                <% } else { %>
+
+
+                  <img
+                    src="/stylesheets/images/blackChair.png"
+                    alt="Project image"
+                  />
+
+
+                <% } %>
+
+
+              </div>
+
+
+            </article>
+
+
+          <% }) %>
+
+
+        </div>
+
+
+      <% } else { %>
+
+
+        <!-- No projects -->
+
+        <div class="no-projects">
+
+          <h3>
+            No projects yet
+          </h3>
+
+          <p>
+            New interior design projects will appear here.
+          </p>
+
+        </div>
+
 
       <% } %>
 
-      <form
-        action="/profile-image"
-        method="POST"
-        enctype="multipart/form-data"
-      >
 
-        <label for="image">Profile image</label>
+    </section>
 
-        <input
-          type="file"
-          name="image"
-          id="image"
-          accept=".jpg,.jpeg,.png,.webp"
-          required
-        />
 
-        <button type="submit">Upload image</button>
+  </main>
 
-      </form>
 
-    <% } else { %>
 
-      <h1>Welcome to the Homiz platform!</h1>
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
-    <% } %>
+  <%- include('./partials/_footer.ejs') %>
 
-    <a href="/projects" class="button">View Projects</a>
 
-    <%- include('./partials/_footer.ejs') %>
-  </body>
+
+  <!-- =====================================================
+       LUCIDE INITIALIZATION
+  ====================================================== -->
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+
+</body>
+
 </html>

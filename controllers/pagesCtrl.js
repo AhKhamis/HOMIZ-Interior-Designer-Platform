@@ -1,6 +1,7 @@
 const cloudinary = require('../config/cloudinary');
 const User = require('../models/user');
 const Designer = require('../models/designer');
+const Project = require('../models/project');
 
 const home = async (req, res) => {
   let profile = null;
@@ -11,7 +12,36 @@ const home = async (req, res) => {
     }).populate('user');
   }
 
-  res.render('index.ejs', { profile });
+  const page = Number(req.query.page) || 1;
+
+  const projectsPerPage = 4;
+
+  const totalProjects = await Project.countDocuments();
+
+  const totalPages = Math.ceil(totalProjects / projectsPerPage);
+
+  const currentPage = Math.min(
+    Math.max(page, 1),
+    Math.max(totalPages, 1)
+  );
+
+  const latestProjects = await Project.find()
+    .sort({ _id: -1 })
+    .skip((currentPage - 1) * projectsPerPage)
+    .limit(projectsPerPage)
+    .populate({
+      path: 'designer',
+      populate: {
+        path: 'user',
+      },
+    });
+
+  res.render('index.ejs', {
+    profile,
+    latestProjects,
+    currentPage,
+    totalPages,
+  });
 };
 
 const uploadImage = (imageBuffer) =>
@@ -57,6 +87,7 @@ const uploadProfileImage = async (req, res) => {
     return res.redirect('/');
   } catch (error) {
     console.error(error);
+
     return res.status(500).send('The image could not be uploaded.');
   }
 };

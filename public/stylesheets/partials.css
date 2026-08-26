@@ -1,54 +1,99 @@
 #navbar {
+  width: min(1100px, calc(100% - 60px));
+
+  margin: 25px auto 0;
+  padding: 10px 0;
+
+  background-color: transparent;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px;
-  background-color: #ffffff;
+
+  direction: ltr;
 }
 
 #navbar .logo img {
   width: 100px;
+
   height: auto;
+
   display: block;
 }
 
 #navbar .nav-links {
   display: flex;
+
   align-items: center;
+
   gap: 30px;
 }
 
 #navbar .nav-link {
   text-decoration: none;
+
   color: #222222;
-  font-size: 15px;
+
+  font-size: 12px;
+
+  transition: opacity 0.2s ease;
+}
+
+#navbar .nav-link:hover {
+  opacity: 0.6;
 }
 
 #navbar .auth-links {
   display: flex;
+
   align-items: center;
-  gap: 15px;
+
+  gap: 10px;
 }
 
 #navbar .auth-links .nav-link {
-  background-color: #222222;
-  color: #ffffff;
-  padding: 12px 20px;
-  border-radius: 8px;
-}
+  background-color: #171717;
 
-#navbar .auth-links .nav-link:hover {
-  opacity: 0.85;
+  color: #ffffff;
+
+  padding: 11px 18px;
+
+  border-radius: 9px;
 }
 
 #navbar .dashboard-button {
-  background-color: #f8fffd;
-  color: #222222;
-  padding: 12px 20px;
-  border-radius: 8px;
+  background-color: #e98b36 !important;
+
+  color: #ffffff !important;
+
+  padding: 11px 18px;
+
+  border-radius: 9px;
 }
 
-#navbar .auth-links .dashboard-button {
-  background-color: #e18c43;
-  color: #f8fffd;
+
+@media (max-width: 700px) {
+
+  #navbar {
+    width: calc(100% - 20px);
+
+    padding: 15px;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  #navbar .nav-links {
+    order: 3;
+
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+  }
+
 }
