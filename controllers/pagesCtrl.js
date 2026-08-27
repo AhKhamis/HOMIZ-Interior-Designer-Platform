@@ -1,5 +1,4 @@
 const cloudinary = require('../config/cloudinary');
-const User = require('../models/user');
 const Designer = require('../models/designer');
 const Project = require('../models/project');
 const Blog = require('../models/blog');
@@ -15,7 +14,6 @@ const home = async (req, res) => {
 
   const page = Number(req.query.page) || 1;
   const projectsPerPage = 4;
-
   const totalProjects = await Project.countDocuments();
 
   const totalPages = Math.ceil(
@@ -101,8 +99,6 @@ const uploadProfileImage = async (req, res) => {
 
     return res.redirect('/');
   } catch (error) {
-    console.error(error);
-
     return res
       .status(500)
       .send('The image could not be uploaded.');

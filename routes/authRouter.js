@@ -1,8 +1,10 @@
 const express = require('express');
+
 const isSignedIn = require('../middleware/isSignedIn');
 const { uploadSingleImage } = require('../middleware/upload');
-const router = express.Router({ mergeParams: true });
 const authCtrl = require('../controllers/authCtrl');
+
+const router = express.Router({ mergeParams: true });
 
 router.get('/sign-up', authCtrl.signup);
 router.post('/sign-up', uploadSingleImage, authCtrl.register);

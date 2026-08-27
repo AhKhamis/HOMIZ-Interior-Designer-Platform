@@ -36,7 +36,6 @@ const index = async (req, res) => {
       blogs,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/');
   }
 };
@@ -53,7 +52,6 @@ const show = async (req, res) => {
       blog,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/blog');
   }
 };
@@ -68,9 +66,7 @@ const create = async (req, res) => {
     let imagePublicId = '';
 
     if (req.file) {
-      const imageResult = await uploadImage(
-        req.file.buffer
-      );
+      const imageResult = await uploadImage(req.file.buffer);
 
       imageUrl = imageResult.secure_url;
       imagePublicId = imageResult.public_id;
@@ -85,7 +81,6 @@ const create = async (req, res) => {
 
     res.redirect('/blog');
   } catch (err) {
-    console.log(err);
     res.redirect('/blog');
   }
 };
@@ -102,7 +97,6 @@ const edit = async (req, res) => {
       blog,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/blog');
   }
 };
@@ -123,9 +117,7 @@ const update = async (req, res) => {
         await deleteImage(blog.imagePublicId);
       }
 
-      const imageResult = await uploadImage(
-        req.file.buffer
-      );
+      const imageResult = await uploadImage(req.file.buffer);
 
       blog.image = imageResult.secure_url;
       blog.imagePublicId = imageResult.public_id;
@@ -135,7 +127,6 @@ const update = async (req, res) => {
 
     res.redirect(`/blog/${blog._id}`);
   } catch (err) {
-    console.log(err);
     res.redirect('/blog');
   }
 };
@@ -156,7 +147,6 @@ const deleteBlog = async (req, res) => {
 
     res.redirect('/blog');
   } catch (err) {
-    console.log(err);
     res.redirect('/blog');
   }
 };

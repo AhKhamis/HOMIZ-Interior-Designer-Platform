@@ -23,11 +23,6 @@ main {
   margin: 0 auto;
 }
 
-
-/* =========================
-   HERO
-========================= */
-
 .hero {
   position: relative;
   width: 100%;
@@ -235,11 +230,6 @@ main {
   font-size: 16px;
 }
 
-
-/* =========================
-   SERVICES
-========================= */
-
 .services-strip {
   min-height: 190px;
   margin-top: 30px;
@@ -293,11 +283,6 @@ main {
 .services-title h2 {
   font-size: 24px;
 }
-
-
-/* =========================
-   PROJECTS
-========================= */
 
 .projects-section {
   width: 100%;
@@ -505,11 +490,6 @@ main {
   color: #777777;
   font-size: 10px;
 }
-
-
-/* =========================
-   BLOG
-========================= */
 
 .home-blog-section {
   width: 100%;
@@ -754,11 +734,6 @@ main {
   color: #777777;
   font-size: 10px;
 }
-
-
-/* =========================
-   DESIGNERS
-========================= */
 
 .home-designers-section {
   width: 100%;
@@ -1127,11 +1102,6 @@ main {
   justify-content: flex-start;
   padding: 35px 20px 10px;
 }
-
-
-/* =========================
-   DASHBOARD
-========================= */
 
 .dashboard-layout {
   width: min(1250px, calc(100% - 60px));
@@ -1606,11 +1576,6 @@ main {
   font-size: 10px;
 }
 
-
-/* =========================
-   NEW PROJECT
-========================= */
-
 .new-project {
   width: 100%;
   margin-top: 35px;
@@ -1920,11 +1885,6 @@ main {
   transform: translateY(-2px);
 }
 
-
-/* =========================
-   EDIT PROJECT
-========================= */
-
 .edit-project-images {
   border-top: 1px solid #eeeeee;
   padding-top: 30px;
@@ -2000,11 +1960,6 @@ main {
   color: #777777;
   font-size: 8px;
 }
-
-
-/* =========================
-   DESIGNERS
-========================= */
 
 .designers-section {
   margin-top: 35px;
@@ -2113,11 +2068,6 @@ main {
   margin-top: 0;
 }
 
-
-/* =========================
-   DESIGNER PROFILE
-========================= */
-
 .designer-profile-page {
   width: 100%;
   margin-top: 35px;
@@ -2222,11 +2172,6 @@ main {
   align-items: center;
   gap: 12px;
 }
-
-
-/* =========================
-   AUTH
-========================= */
 
 .auth-page {
   width: 100%;
@@ -2382,11 +2327,6 @@ main {
 .auth-signup a:hover {
   color: #e98b36;
 }
-
-
-/* =========================
-   RESPONSIVE - 900PX
-========================= */
 
 @media (max-width: 900px) {
 
@@ -2569,11 +2509,6 @@ main {
   }
 }
 
-
-/* =========================
-   RESPONSIVE - 700PX
-========================= */
-
 @media (max-width: 700px) {
 
   .dashboard-layout {
@@ -2686,11 +2621,6 @@ main {
     height: 300px;
   }
 }
-
-
-/* =========================
-   RESPONSIVE - 600PX
-========================= */
 
 @media (max-width: 600px) {
 

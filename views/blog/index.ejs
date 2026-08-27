@@ -1,45 +1,31 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
-
   <link
     rel="stylesheet"
     href="/stylesheets/style.css"
   >
-
   <link
     rel="stylesheet"
     href="/stylesheets/partials.css"
   >
-
   <link
     rel="stylesheet"
     href="/stylesheets/blog.css"
   >
-
   <title>Blog | HOMIZ</title>
-
 </head>
-
 <body>
-
   <%- include('../partials/_navbar.ejs') %>
 
   <main>
-
     <section class="blog-page">
-
       <div class="blog-page-header">
-
         <p class="blog-page-kicker">
           HOMIZ JOURNAL
         </p>
@@ -52,45 +38,28 @@
           Discover ideas, inspiration, and insights
           from the world of interior design.
         </p>
-
       </div>
 
-
       <% if (blogs.length > 0) { %>
-
         <div class="blog-grid">
-
           <% blogs.forEach(blog => { %>
-
             <article class="blog-card">
-
-
               <% if (blog.image) { %>
-
                 <div class="blog-card-image">
-
                   <img
                     src="<%= blog.image %>"
                     alt="<%= blog.title %>"
                   >
-
                 </div>
-
               <% } else { %>
-
                 <div class="blog-card-image-placeholder">
-
                   <span>
                     HOMIZ
                   </span>
-
                 </div>
-
               <% } %>
 
-
               <div class="blog-card-content">
-
                 <p class="blog-card-kicker">
                   HOMIZ BLOG
                 </p>
@@ -103,31 +72,18 @@
                   <%= blog.content %>
                 </p>
 
-
                 <a
                   href="/blog/<%= blog._id %>"
                   class="blog-read-button"
                 >
-
                   Read More
-
                 </a>
-
               </div>
-
-
             </article>
-
           <% }) %>
-
         </div>
-
-
       <% } else { %>
-
-
         <div class="blog-empty">
-
           <div class="blog-empty-icon">
             +
           </div>
@@ -139,20 +95,11 @@
           <p>
             There are no articles available at the moment.
           </p>
-
         </div>
-
-
       <% } %>
-
-
     </section>
-
   </main>
 
-
   <%- include('../partials/_footer.ejs') %>
-
 </body>
-
 </html>

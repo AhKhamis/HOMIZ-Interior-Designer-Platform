@@ -1,4 +1,5 @@
 const express = require('express');
+
 const isAdmin = require('../middleware/isAdmin');
 const blogCtrl = require('../controllers/blogCtrl');
 const { uploadSingleImage } = require('../middleware/upload');

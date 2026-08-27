@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +8,17 @@
   <link rel="stylesheet" href="/stylesheets/blog.css">
   <title>Edit Blog Post | HOMIZ</title>
 </head>
-
 <body>
-
   <%- include('../partials/_navbar.ejs') %>
 
   <main>
-
     <section class="blog-new">
-
       <div class="blog-new-header">
-
         <p class="blog-new-kicker">HOMIZ BLOG</p>
-
         <h1>Edit Blog Post</h1>
-
         <p class="blog-new-intro">
           Update your article and featured image.
         </p>
-
       </div>
 
       <form
@@ -37,9 +27,7 @@
         method="POST"
         enctype="multipart/form-data"
       >
-
         <div class="blog-new-field">
-
           <label for="title">Title</label>
 
           <input
@@ -49,11 +37,9 @@
             value="<%= blog.title %>"
             required
           >
-
         </div>
 
         <div class="blog-new-field">
-
           <label for="content">Content</label>
 
           <textarea
@@ -61,13 +47,10 @@
             name="content"
             required
           ><%= blog.content %></textarea>
-
         </div>
 
         <% if (blog.image) { %>
-
           <div class="blog-new-field">
-
             <label>Current Image</label>
 
             <div class="blog-edit-current-image">
@@ -76,13 +59,10 @@
                 alt="<%= blog.title %>"
               >
             </div>
-
           </div>
-
         <% } %>
 
         <div class="blog-new-field">
-
           <label for="image">Change Image</label>
 
           <input
@@ -91,11 +71,9 @@
             name="image"
             accept="image/jpeg,image/png,image/webp"
           >
-
         </div>
 
         <div class="blog-new-actions">
-
           <a
             href="/blog/<%= blog._id %>"
             class="blog-new-cancel"
@@ -110,17 +88,11 @@
             Update Post
             <span>→</span>
           </button>
-
         </div>
-
       </form>
-
     </section>
-
   </main>
 
   <%- include('../partials/_footer.ejs') %>
-
 </body>
-
 </html>

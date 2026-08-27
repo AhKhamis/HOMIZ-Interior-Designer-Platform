@@ -16,6 +16,7 @@ const uploadImage = (imageBuffer) =>
         if (error) {
           return reject(error);
         }
+
         return resolve(result);
       }
     );
@@ -29,9 +30,6 @@ const signup = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    console.log('REQ BODY:', req.body);
-    console.log('REQ FILE:', req.file);
-
     if (!req.body) {
       return res.send('No form data received');
     }
@@ -84,8 +82,7 @@ const register = async (req, res) => {
       res.redirect('/');
     });
   } catch (err) {
-    console.log(err);
-    res.send('something went wrong');
+    res.send('Something went wrong');
   }
 };
 

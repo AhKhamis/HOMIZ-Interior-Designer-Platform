@@ -15,7 +15,6 @@ const dashboard = async (req, res) => {
       blogs,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/');
   }
 };
@@ -28,19 +27,20 @@ const deleteUser = async (req, res) => {
       return res.redirect('/admin');
     }
 
-    await Designer.findOneAndDelete({
+    const designer = await Designer.findOneAndDelete({
       user: user._id,
     });
 
-    await Project.deleteMany({
-      designer: user._id,
-    });
+    if (designer) {
+      await Project.deleteMany({
+        designer: designer._id,
+      });
+    }
 
     await User.findByIdAndDelete(user._id);
 
     res.redirect('/admin');
   } catch (err) {
-    console.log(err);
     res.redirect('/admin');
   }
 };

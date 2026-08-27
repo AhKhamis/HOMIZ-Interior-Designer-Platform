@@ -14,8 +14,11 @@ const upload = multer({
   },
   fileFilter: (req, file, done) => {
     if (!allowedImageTypes.has(file.mimetype)) {
-      return done(new Error('Please choose a JPG, PNG, or WebP image.'));
+      return done(
+        new Error('Please choose a JPG, PNG, or WebP image.')
+      );
     }
+
     return done(null, true);
   },
 });
@@ -25,6 +28,7 @@ const uploadSingleImage = (req, res, next) => {
     if (error) {
       return res.status(400).send(error.message);
     }
+
     next();
   });
 };

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const isAdmin = require('../middleware/isAdmin');
 const adminCtrl = require('../controllers/adminCtrl');
 

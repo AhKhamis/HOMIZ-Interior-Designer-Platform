@@ -13,6 +13,7 @@ const uploadImage = (imageBuffer) =>
         if (error) {
           return reject(error);
         }
+
         return resolve(result);
       }
     );
@@ -31,9 +32,11 @@ const deleteImage = async (publicId) => {
 const index = async (req, res) => {
   try {
     const designers = await Designer.find().populate('user');
-    res.render('designers/index.ejs', { designers });
+
+    res.render('designers/index.ejs', {
+      designers,
+    });
   } catch (err) {
-    console.log(err);
     res.redirect('/');
   }
 };
@@ -46,9 +49,10 @@ const showProfile = async (req, res) => {
       return res.redirect('/designers');
     }
 
-    res.render('designers/profile.ejs', { designer });
+    res.render('designers/profile.ejs', {
+      designer,
+    });
   } catch (err) {
-    console.log(err);
     res.redirect('/designers');
   }
 };
@@ -63,9 +67,10 @@ const editProfile = async (req, res) => {
       return res.redirect('/projects/dashboard');
     }
 
-    res.render('designers/edit.ejs', { designer });
+    res.render('designers/edit.ejs', {
+      designer,
+    });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects/dashboard');
   }
 };
@@ -88,26 +93,18 @@ const updateProfile = async (req, res) => {
 
     user.name = req.body.name;
     user.username = req.body.username;
-
     designer.bio = req.body.bio;
     designer.specialization = req.body.specialization;
 
     if (req.file) {
       if (designer.profileImagePublicId) {
-        await deleteImage(
-          designer.profileImagePublicId
-        );
+        await deleteImage(designer.profileImagePublicId);
       }
 
-      const imageResult = await uploadImage(
-        req.file.buffer
-      );
+      const imageResult = await uploadImage(req.file.buffer);
 
-      designer.profileImageUrl =
-        imageResult.secure_url;
-
-      designer.profileImagePublicId =
-        imageResult.public_id;
+      designer.profileImageUrl = imageResult.secure_url;
+      designer.profileImagePublicId = imageResult.public_id;
     }
 
     await user.save();
@@ -119,7 +116,6 @@ const updateProfile = async (req, res) => {
       res.redirect('/projects/dashboard');
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects/dashboard');
   }
 };

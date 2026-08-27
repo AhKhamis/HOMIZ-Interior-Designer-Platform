@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/partials.css">
-  <title>Sign Up</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <link
+    rel="stylesheet"
+    href="/stylesheets/style.css"
+  >
+  <link
+    rel="stylesheet"
+    href="/stylesheets/partials.css"
+  >
+  <title>Sign Up | HOMIZ</title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
@@ -14,7 +23,9 @@
     <section class="new-project">
       <div class="new-project-header">
         <p class="new-project-kicker">CREATE ACCOUNT</p>
+
         <h1>Join HOMIZ</h1>
+
         <p class="new-project-intro">
           Create your designer account and build your professional profile.
         </p>
@@ -28,6 +39,7 @@
       >
         <div class="new-project-field">
           <label for="name">Name</label>
+
           <input
             type="text"
             id="name"
@@ -39,6 +51,7 @@
 
         <div class="new-project-field">
           <label for="username">Username</label>
+
           <input
             type="text"
             id="username"
@@ -51,6 +64,7 @@
         <div class="new-project-fields-row">
           <div class="new-project-field">
             <label for="password">Password</label>
+
             <input
               type="password"
               id="password"
@@ -62,6 +76,7 @@
 
           <div class="new-project-field">
             <label for="confirmPassword">Confirm Password</label>
+
             <input
               type="password"
               id="confirmPassword"
@@ -74,6 +89,7 @@
 
         <div class="new-project-field">
           <label for="specialization">Specialization</label>
+
           <input
             type="text"
             id="specialization"
@@ -84,6 +100,7 @@
 
         <div class="new-project-field">
           <label for="bio">Bio</label>
+
           <textarea
             id="bio"
             name="bio"
@@ -94,13 +111,22 @@
         <div class="new-project-images">
           <div class="new-project-section-title">
             <p>PROFILE IMAGE</p>
+
             <h2>Upload your profile image</h2>
-            <span>JPG, PNG or WebP. Maximum size 5MB.</span>
+
+            <span>
+              JPG, PNG or WebP. Maximum size 5MB.
+            </span>
           </div>
 
-          <label for="image" class="new-project-upload">
+          <label
+            for="image"
+            class="new-project-upload"
+          >
             <span class="new-project-upload-icon">+</span>
+
             <strong>Choose Profile Image</strong>
+
             <small>Click here to select an image</small>
           </label>
 
@@ -112,7 +138,10 @@
             required
           >
 
-          <div id="profile-preview" class="new-project-preview"></div>
+          <div
+            id="profile-preview"
+            class="new-project-preview"
+          ></div>
         </div>
 
         <div class="new-project-actions">
@@ -121,7 +150,6 @@
             class="new-project-submit"
           >
             Create Account
-            <span>←</span>
           </button>
         </div>
       </form>
@@ -154,6 +182,5 @@
   </script>
 
   <%- include('../partials/_footer.ejs') %>
-  
 </body>
 </html>

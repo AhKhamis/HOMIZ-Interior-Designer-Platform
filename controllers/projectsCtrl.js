@@ -30,7 +30,6 @@ const index = async (req, res) => {
       latestDesigners,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/');
   }
 };
@@ -54,7 +53,6 @@ const show = async (req, res) => {
       project,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };
@@ -67,7 +65,6 @@ const newProject = async (req, res) => {
       services,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };
@@ -134,12 +131,10 @@ const create = async (req, res) => {
       return res.redirect('/projects/new');
     }
 
-    const mainImageFile =
-      req.files[mainImageIndex];
+    const mainImageFile = req.files[mainImageIndex];
 
     const galleryFiles = req.files.filter(
-      (file, index) =>
-        index !== mainImageIndex
+      (file, index) => index !== mainImageIndex
     );
 
     const mainImageResult = await uploadImage(
@@ -157,22 +152,19 @@ const create = async (req, res) => {
       publicId: mainImageResult.public_id,
     };
 
-    req.body.galleryImages =
-      galleryResults.map((result) => ({
+    req.body.galleryImages = galleryResults.map(
+      (result) => ({
         url: result.secure_url,
         publicId: result.public_id,
-      }));
+      })
+    );
 
     delete req.body.mainImageIndex;
 
-    const project =
-      await Project.create(req.body);
+    const project = await Project.create(req.body);
 
-    res.redirect(
-      `/projects/${project._id}`
-    );
+    res.redirect(`/projects/${project._id}`);
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };
@@ -203,7 +195,6 @@ const edit = async (req, res) => {
       services,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };
@@ -234,10 +225,7 @@ const update = async (req, res) => {
       return res.redirect('/projects/dashboard');
     }
 
-    if (
-      req.files &&
-      req.files.length > 0
-    ) {
+    if (req.files && req.files.length > 0) {
       const mainImageIndex = Number(
         req.body.mainImageIndex
       );
@@ -256,9 +244,7 @@ const update = async (req, res) => {
         project.mainImage &&
         project.mainImage.publicId
       ) {
-        await deleteImage(
-          project.mainImage.publicId
-        );
+        await deleteImage(project.mainImage.publicId);
       }
 
       if (
@@ -272,36 +258,33 @@ const update = async (req, res) => {
         );
       }
 
-      const mainImageFile =
-        req.files[mainImageIndex];
+      const mainImageFile = req.files[mainImageIndex];
 
       const galleryFiles = req.files.filter(
-        (file, index) =>
-          index !== mainImageIndex
+        (file, index) => index !== mainImageIndex
       );
 
-      const mainImageResult =
-        await uploadImage(
-          mainImageFile.buffer
-        );
+      const mainImageResult = await uploadImage(
+        mainImageFile.buffer
+      );
 
-      const galleryResults =
-        await Promise.all(
-          galleryFiles.map((file) =>
-            uploadImage(file.buffer)
-          )
-        );
+      const galleryResults = await Promise.all(
+        galleryFiles.map((file) =>
+          uploadImage(file.buffer)
+        )
+      );
 
       project.mainImage = {
         url: mainImageResult.secure_url,
         publicId: mainImageResult.public_id,
       };
 
-      project.galleryImages =
-        galleryResults.map((result) => ({
+      project.galleryImages = galleryResults.map(
+        (result) => ({
           url: result.secure_url,
           publicId: result.public_id,
-        }));
+        })
+      );
     }
 
     project.title = req.body.title;
@@ -312,11 +295,8 @@ const update = async (req, res) => {
 
     await project.save();
 
-    res.redirect(
-      `/projects/${project._id}`
-    );
+    res.redirect(`/projects/${project._id}`);
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };
@@ -344,9 +324,7 @@ const deleteProject = async (req, res) => {
       project.mainImage &&
       project.mainImage.publicId
     ) {
-      await deleteImage(
-        project.mainImage.publicId
-      );
+      await deleteImage(project.mainImage.publicId);
     }
 
     if (
@@ -360,13 +338,10 @@ const deleteProject = async (req, res) => {
       );
     }
 
-    await Project.findByIdAndDelete(
-      project._id
-    );
+    await Project.findByIdAndDelete(project._id);
 
     res.redirect('/projects/dashboard');
   } catch (err) {
-    console.log(err);
     res.redirect('/projects/dashboard');
   }
 };
@@ -390,7 +365,6 @@ const dashboard = async (req, res) => {
       designer,
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/projects');
   }
 };

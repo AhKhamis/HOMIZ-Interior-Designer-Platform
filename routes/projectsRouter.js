@@ -1,11 +1,13 @@
 const express = require('express');
+
 const isSignedIn = require('../middleware/isSignedIn');
 const uploadMultipleImages = require('../middleware/uploadMultiple');
-const router = express.Router({ mergeParams: true });
-
 const projectsCtrl = require('../controllers/projectsCtrl');
 
+const router = express.Router({ mergeParams: true });
+
 router.get('/', projectsCtrl.index);
+
 router.get('/new', isSignedIn, projectsCtrl.newProject);
 
 router.post(
@@ -24,7 +26,12 @@ router.put(
   projectsCtrl.update
 );
 
-router.delete('/:id', isSignedIn, projectsCtrl.deleteProject);
+router.delete(
+  '/:id',
+  isSignedIn,
+  projectsCtrl.deleteProject
+);
+
 router.get('/dashboard', isSignedIn, projectsCtrl.dashboard);
 
 router.get('/:id', projectsCtrl.show);
