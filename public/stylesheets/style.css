@@ -946,10 +946,6 @@ main {
 }
 
 
-/* =========================
-   CTA
-========================= */
-
 .cta-section {
   margin-bottom: 80px;
   padding: 90px;
@@ -972,11 +968,6 @@ main {
   background-color: #ffffff;
   color: #171717;
 }
-
-
-/* =========================
-   PROJECT DETAILS
-========================= */
 
 .project-details {
   width: 100%;
