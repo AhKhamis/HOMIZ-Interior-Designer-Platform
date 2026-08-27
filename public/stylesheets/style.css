@@ -23,6 +23,7 @@ main {
   margin: 0 auto;
 }
 
+
 /* =========================
    HERO
 ========================= */
@@ -234,6 +235,7 @@ main {
   font-size: 16px;
 }
 
+
 /* =========================
    SERVICES
 ========================= */
@@ -292,34 +294,6 @@ main {
   font-size: 24px;
 }
 
-/* =========================
-   INTRO
-========================= */
-
-.intro-section {
-  max-width: 800px;
-  padding: 130px 80px;
-}
-
-.section-label {
-  margin-bottom: 15px;
-  color: #75a18e;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-.intro-section h2 {
-  margin-bottom: 25px;
-  font-size: 52px;
-  line-height: 1.15;
-}
-
-.intro-section > p:last-child {
-  max-width: 600px;
-  color: #666666;
-  font-size: 15px;
-  line-height: 1.9;
-}
 
 /* =========================
    PROJECTS
@@ -328,7 +302,7 @@ main {
 .projects-section {
   width: 100%;
   margin-top: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   padding: 35px 45px;
   background-color: #ffffff;
   border-radius: 22px;
@@ -380,12 +354,23 @@ main {
   font-size: 25px;
   line-height: 1;
   cursor: pointer;
+  text-decoration: none;
   transition: transform .2s ease, opacity .2s ease;
 }
 
 .projects-arrow:hover {
   transform: translateY(-2px);
   opacity: .9;
+}
+
+.projects-arrow.disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.projects-arrow.disabled:hover {
+  transform: none;
+  opacity: .35;
 }
 
 .projects-grid {
@@ -499,6 +484,468 @@ main {
   transform: scale(1.03);
 }
 
+.no-projects {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  background-color: #fafafa;
+}
+
+.no-projects h3 {
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.no-projects p {
+  color: #777777;
+  font-size: 10px;
+}
+
+
+/* =========================
+   BLOG
+========================= */
+
+.home-blog-section {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 35px 45px;
+  background-color: #ffffff;
+  border-radius: 22px;
+}
+
+.home-blog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.home-blog-title {
+  width: 100%;
+  text-align: right;
+}
+
+.home-blog-title p {
+  margin-bottom: 4px;
+  color: #75a18e;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.home-blog-title h2 {
+  color: #171717;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.home-blog-grid {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 18px;
+}
+
+.home-blog-featured {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 300px;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.home-blog-featured-image {
+  min-height: 300px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+.home-blog-featured-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.home-blog-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e98b36;
+  color: #ffffff;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.home-blog-featured-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.home-blog-featured-content > p {
+  margin-bottom: 7px;
+  color: #75a18e;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.home-blog-featured-content h3 {
+  margin-bottom: 12px;
+  color: #171717;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.home-blog-featured-description {
+  color: #777777;
+  font-size: 10px;
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-blog-button {
+  margin-top: auto;
+  align-self: flex-end;
+  padding: 11px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background-color: #171717;
+  color: #ffffff;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  transition: .2s ease;
+}
+
+.home-blog-button span {
+  font-size: 14px;
+}
+
+.home-blog-button:hover {
+  background-color: #e98b36;
+  transform: translateY(-2px);
+}
+
+.home-blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home-blog-small {
+  position: relative;
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: 95px 1fr 32px;
+  align-items: center;
+  gap: 13px;
+  padding: 10px;
+  border: 1px solid #eeeeee;
+  border-radius: 13px;
+  background-color: #ffffff;
+  transition: .2s ease;
+}
+
+.home-blog-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .05);
+}
+
+.home-blog-small-image {
+  width: 95px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 9px;
+  background-color: #f2f2f2;
+}
+
+.home-blog-small-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.home-blog-small-image .home-blog-placeholder {
+  min-height: 72px;
+  font-size: 20px;
+}
+
+.home-blog-small-content {
+  min-width: 0;
+  text-align: right;
+}
+
+.home-blog-small-content h3 {
+  margin-bottom: 5px;
+  color: #171717;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.home-blog-small-content p {
+  color: #777777;
+  font-size: 8px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-blog-small-arrow {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #171717;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: .2s ease;
+}
+
+.home-blog-small-arrow:hover {
+  background-color: #e98b36;
+  transform: translateY(-2px);
+}
+
+.home-blog-empty {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  background-color: #fafafa;
+}
+
+.home-blog-empty h3 {
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.home-blog-empty p {
+  color: #777777;
+  font-size: 10px;
+}
+
+
+/* =========================
+   DESIGNERS
+========================= */
+
+.home-designers-section {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 80px;
+  padding: 35px 45px;
+  background-color: #ffffff;
+  border-radius: 22px;
+}
+
+.home-designers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.home-designers-title {
+  text-align: right;
+}
+
+.home-designers-title p {
+  margin-bottom: 4px;
+  color: #75a18e;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.home-designers-title h2 {
+  color: #171717;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.home-designers-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  background-color: #171717;
+  color: #ffffff;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 600;
+  transition: .2s ease;
+}
+
+.home-designers-view-all span {
+  font-size: 15px;
+}
+
+.home-designers-view-all:hover {
+  background-color: #e98b36;
+  transform: translateY(-2px);
+}
+
+.home-designers-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.home-designer-card {
+  min-width: 0;
+  overflow: hidden;
+  display: block;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 15px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.home-designer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.home-designer-image {
+  position: relative;
+  width: 100%;
+  height: 245px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+.home-designer-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+.home-designer-card:hover .home-designer-image img {
+  transform: scale(1.04);
+}
+
+.home-designer-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e98b36;
+  color: #ffffff;
+  font-size: 55px;
+  font-weight: 600;
+}
+
+.home-designer-arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, .92);
+  color: #171717;
+  border-radius: 50%;
+  font-size: 17px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.home-designer-card:hover .home-designer-arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-designer-info {
+  padding: 17px 18px 19px;
+  text-align: right;
+}
+
+.home-designer-info p {
+  margin-bottom: 5px;
+  color: #75a18e;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.home-designer-info h3 {
+  margin-bottom: 5px;
+  color: #171717;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.home-designer-info span {
+  color: #777777;
+  font-size: 9px;
+}
+
+.home-designers-empty {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #eeeeee;
+  border-radius: 15px;
+  background-color: #fafafa;
+}
+
+.home-designers-empty h3 {
+  margin-bottom: 7px;
+  color: #171717;
+  font-size: 17px;
+}
+
+.home-designers-empty p {
+  color: #777777;
+  font-size: 10px;
+}
+
+
 /* =========================
    CTA
 ========================= */
@@ -525,6 +972,7 @@ main {
   background-color: #ffffff;
   color: #171717;
 }
+
 
 /* =========================
    PROJECT DETAILS
@@ -688,6 +1136,7 @@ main {
   justify-content: flex-start;
   padding: 35px 20px 10px;
 }
+
 
 /* =========================
    DASHBOARD
@@ -1166,6 +1615,7 @@ main {
   font-size: 10px;
 }
 
+
 /* =========================
    NEW PROJECT
 ========================= */
@@ -1479,6 +1929,7 @@ main {
   transform: translateY(-2px);
 }
 
+
 /* =========================
    EDIT PROJECT
 ========================= */
@@ -1558,6 +2009,7 @@ main {
   color: #777777;
   font-size: 8px;
 }
+
 
 /* =========================
    DESIGNERS
@@ -1670,6 +2122,7 @@ main {
   margin-top: 0;
 }
 
+
 /* =========================
    DESIGNER PROFILE
 ========================= */
@@ -1779,8 +2232,9 @@ main {
   gap: 12px;
 }
 
+
 /* =========================
-   AUTH PAGES
+   AUTH
 ========================= */
 
 .auth-page {
@@ -1938,6 +2392,7 @@ main {
   color: #e98b36;
 }
 
+
 /* =========================
    RESPONSIVE - 900PX
 ========================= */
@@ -2014,15 +2469,9 @@ main {
     text-align: center;
   }
 
-  .intro-section {
-    padding: 80px 20px;
-  }
-
-  .intro-section h2 {
-    font-size: 40px;
-  }
-
-  .projects-section {
+  .projects-section,
+  .home-blog-section,
+  .home-designers-section {
     padding: 50px 35px;
   }
 
@@ -2030,8 +2479,20 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .designers-grid {
+  .home-blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-blog-featured {
+    min-height: 280px;
+  }
+
+  .home-designers-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-designer-image {
+    height: 260px;
   }
 
   .cta-section {
@@ -2116,6 +2577,7 @@ main {
     max-width: 460px;
   }
 }
+
 
 /* =========================
    RESPONSIVE - 700PX
@@ -2234,6 +2696,7 @@ main {
   }
 }
 
+
 /* =========================
    RESPONSIVE - 600PX
 ========================= */
@@ -2345,32 +2808,27 @@ main {
     font-size: 21px;
   }
 
-  .intro-section {
-    padding: 60px 10px;
+  .projects-section,
+  .home-blog-section,
+  .home-designers-section {
+    padding: 40px 20px;
+    border-radius: 18px;
   }
 
-  .intro-section h2 {
-    font-size: 34px;
-  }
-
-  .intro-section > p:last-child {
-    font-size: 13px;
-  }
-
-  .projects-section {
-    padding: 40px 25px;
-    margin-bottom: 50px;
-  }
-
-  .projects-header {
+  .projects-header,
+  .home-designers-header {
     margin-bottom: 20px;
   }
 
-  .projects-title h2 {
+  .projects-title h2,
+  .home-blog-title h2,
+  .home-designers-title h2 {
     font-size: 22px;
   }
 
-  .projects-title p {
+  .projects-title p,
+  .home-blog-title p,
+  .home-designers-title p {
     font-size: 8px;
     letter-spacing: 1.5px;
   }
@@ -2384,11 +2842,6 @@ main {
     height: 40px;
     font-size: 20px;
     border-radius: 8px;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
   }
 
   .project-card {
@@ -2427,6 +2880,85 @@ main {
 
   .project-image {
     min-height: 210px;
+  }
+
+  .home-blog-grid {
+    gap: 14px;
+  }
+
+  .home-blog-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .home-blog-featured-image {
+    height: 220px;
+    min-height: 220px;
+  }
+
+  .home-blog-featured-content {
+    padding: 20px;
+    min-height: 220px;
+  }
+
+  .home-blog-small {
+    grid-template-columns: 75px 1fr 30px;
+    gap: 10px;
+  }
+
+  .home-blog-small-image {
+    width: 75px;
+    height: 65px;
+  }
+
+  .home-blog-small-content h3 {
+    font-size: 11px;
+  }
+
+  .home-blog-small-content p {
+    font-size: 7px;
+  }
+
+  .home-blog-small-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .home-designers-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-designers-view-all {
+    align-self: flex-start;
+  }
+
+  .home-designers-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .home-designer-image {
+    height: 190px;
+  }
+
+  .home-designer-info {
+    padding: 14px;
+  }
+
+  .home-designer-info h3 {
+    font-size: 13px;
+  }
+
+  .home-designer-info span {
+    font-size: 8px;
+  }
+
+  .home-designer-arrow {
+    width: 31px;
+    height: 31px;
+    right: 9px;
+    bottom: 9px;
+    font-size: 15px;
   }
 
   .cta-section {
@@ -2656,8 +3188,6 @@ main {
     align-items: stretch;
   }
 
-  /* AUTH */
-
   .auth-page {
     min-height: 560px;
     margin: 20px 0 50px;
@@ -2688,5 +3218,4 @@ main {
   .auth-submit {
     min-height: 44px;
   }
-
 }

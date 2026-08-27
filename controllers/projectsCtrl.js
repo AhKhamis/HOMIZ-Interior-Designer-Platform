@@ -1,6 +1,7 @@
 const Project = require('../models/project');
 const Service = require('../models/service');
 const Designer = require('../models/designer');
+const Blog = require('../models/blog');
 const cloudinary = require('../config/cloudinary');
 
 const index = async (req, res) => {
@@ -14,8 +15,19 @@ const index = async (req, res) => {
         },
       });
 
+    const latestBlogs = await Blog.find()
+      .sort({ _id: -1 })
+      .limit(4);
+
+    const latestDesigners = await Designer.find()
+      .sort({ _id: -1 })
+      .limit(4)
+      .populate('user');
+
     res.render('projects/index.ejs', {
       projects,
+      latestBlogs,
+      latestDesigners,
     });
   } catch (err) {
     console.log(err);

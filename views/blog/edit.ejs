@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,46 +7,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/partials.css">
-  <title>Edit Blog Post</title>
+  <link rel="stylesheet" href="/stylesheets/blog.css">
+  <title>Edit Blog Post | HOMIZ</title>
 </head>
 
 <body>
 
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Edit Blog Post</h1>
+  <main>
 
-  <form action="/blog/<%= blog._id %>?_method=PUT" method="POST">
+    <section class="blog-new">
 
-    <label for="title">Title</label>
-    <input
-      type="text"
-      id="title"
-      name="title"
-      value="<%= blog.title %>"
-      required
-    >
+      <div class="blog-new-header">
 
-    <label for="content">Content</label>
-    <textarea
-      id="content"
-      name="content"
-      required
-    ><%= blog.content %></textarea>
+        <p class="blog-new-kicker">HOMIZ BLOG</p>
 
-    <label for="image">Image URL</label>
-    <input
-      type="text"
-      id="image"
-      name="image"
-      value="<%= blog.image || '' %>"
-    >
+        <h1>Edit Blog Post</h1>
 
-    <button type="submit">Update Post</button>
+        <p class="blog-new-intro">
+          Update your article and featured image.
+        </p>
 
-  </form>
+      </div>
 
-  <a href="/blog/<%= blog._id %>">Cancel</a>
+      <form
+        class="blog-new-form"
+        action="/blog/<%= blog._id %>?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+
+        <div class="blog-new-field">
+
+          <label for="title">Title</label>
+
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value="<%= blog.title %>"
+            required
+          >
+
+        </div>
+
+        <div class="blog-new-field">
+
+          <label for="content">Content</label>
+
+          <textarea
+            id="content"
+            name="content"
+            required
+          ><%= blog.content %></textarea>
+
+        </div>
+
+        <% if (blog.image) { %>
+
+          <div class="blog-new-field">
+
+            <label>Current Image</label>
+
+            <div class="blog-edit-current-image">
+              <img
+                src="<%= blog.image %>"
+                alt="<%= blog.title %>"
+              >
+            </div>
+
+          </div>
+
+        <% } %>
+
+        <div class="blog-new-field">
+
+          <label for="image">Change Image</label>
+
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/jpeg,image/png,image/webp"
+          >
+
+        </div>
+
+        <div class="blog-new-actions">
+
+          <a
+            href="/blog/<%= blog._id %>"
+            class="blog-new-cancel"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="blog-new-submit"
+          >
+            Update Post
+            <span>→</span>
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <%- include('../partials/_footer.ejs') %>
 
 </body>
 

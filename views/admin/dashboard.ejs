@@ -1,62 +1,402 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/partials.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <title>Admin Dashboard</title>
+  <link
+    rel="stylesheet"
+    href="/stylesheets/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/stylesheets/partials.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/stylesheets/admin-dashboard.css"
+  >
+
+  <title>Admin Dashboard | HOMIZ</title>
+
 </head>
 
 <body>
 
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Admin Dashboard</h1>
+  <main>
 
-  <h2>All Users</h2>
+    <section class="admin-dashboard">
 
-  <% if (users.length > 0) { %>
+      <div class="admin-dashboard-header">
 
-    <% users.forEach(user => { %>
+        <div>
 
-      <div>
+          <p class="admin-kicker">
+            HOMIZ ADMIN
+          </p>
 
-        <h3><%= user.name %></h3>
+          <h1>
+            Admin Dashboard
+          </h1>
 
-        <p>
-          <strong>Username:</strong>
-          <%= user.username %>
-        </p>
+          <p class="admin-intro">
+            Manage designers and blog content from one place.
+          </p>
 
-        <p>
-          <strong>Role:</strong>
-          <%= user.role %>
-        </p>
-
-        <% if (user.role !== 'admin') { %>
-
-          <form
-            action="/admin/users/<%= user._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button type="submit">Delete</button>
-          </form>
-
-        <% } %>
+        </div>
 
       </div>
 
-    <% }) %>
 
-  <% } else { %>
+      <!-- STATS -->
 
-    <p>No users found.</p>
+      <div class="admin-stats">
 
-  <% } %>
+        <div class="admin-stat">
+
+          <span>
+            USERS
+          </span>
+
+          <strong>
+            <%= users.length %>
+          </strong>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+          <span>
+            DESIGNERS
+          </span>
+
+          <strong>
+            <%= designers.length %>
+          </strong>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+          <span>
+            BLOG POSTS
+          </span>
+
+          <strong>
+            <%= blogs.length %>
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- DESIGNERS -->
+
+      <section class="admin-section">
+
+        <div class="admin-section-header">
+
+          <div>
+
+            <p class="admin-section-kicker">
+              USERS
+            </p>
+
+            <h2>
+              Designers
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <% if (designers.length > 0) { %>
+
+          <div class="admin-users-list">
+
+            <% designers.forEach(designer => { %>
+
+              <div class="admin-user-card">
+
+
+                <div class="admin-user-info">
+
+
+                  <div class="admin-user-avatar">
+
+                    <% if (designer.profileImageUrl) { %>
+
+                      <img
+                        src="<%= designer.profileImageUrl %>"
+                        alt="<%= designer.user.name %>'s profile"
+                      >
+
+                    <% } else { %>
+
+                      <%= designer.user.name
+                        .charAt(0)
+                        .toUpperCase()
+                      %>
+
+                    <% } %>
+
+                  </div>
+
+
+                  <div>
+
+                    <h3>
+                      <%= designer.user.name %>
+                    </h3>
+
+                    <p>
+                      @<%= designer.user.username %>
+                    </p>
+
+                  </div>
+
+
+                </div>
+
+
+                <div class="admin-user-role">
+
+                  <span>
+                    DESIGNER
+                  </span>
+
+                </div>
+
+
+                <form
+                  action="/admin/users/<%= designer.user._id %>?_method=DELETE"
+                  method="POST"
+                >
+
+                  <button
+                    type="submit"
+                    class="admin-delete-button"
+                  >
+                    Delete
+                  </button>
+
+                </form>
+
+
+              </div>
+
+            <% }) %>
+
+          </div>
+
+
+        <% } else { %>
+
+
+          <div class="admin-empty">
+
+            <p>
+              No designers found.
+            </p>
+
+          </div>
+
+
+        <% } %>
+
+      </section>
+
+
+      <!-- BLOG -->
+
+      <section class="admin-section">
+
+        <div class="admin-section-header">
+
+          <div>
+
+            <p class="admin-section-kicker">
+              CONTENT
+            </p>
+
+            <h2>
+              Blog
+            </h2>
+
+          </div>
+
+
+          <a
+            href="/blog/new"
+            class="admin-add-button"
+          >
+            Add Article
+
+            <span>
+              +
+            </span>
+
+          </a>
+
+        </div>
+
+
+        <% if (blogs.length > 0) { %>
+
+
+          <div class="admin-blog-list">
+
+
+            <% blogs.forEach(blog => { %>
+
+
+              <article class="admin-blog-card">
+
+
+                <% if (blog.image) { %>
+
+                  <div class="admin-blog-image">
+
+                    <img
+                      src="<%= blog.image %>"
+                      alt="<%= blog.title %>"
+                    >
+
+                  </div>
+
+
+                <% } else { %>
+
+
+                  <div class="admin-blog-image-placeholder">
+
+                    BLOG
+
+                  </div>
+
+
+                <% } %>
+
+
+                <div class="admin-blog-info">
+
+
+                  <p class="admin-blog-kicker">
+                    HOMIZ BLOG
+                  </p>
+
+
+                  <h3>
+                    <%= blog.title %>
+                  </h3>
+
+
+                  <p class="admin-blog-content">
+                    <%= blog.content %>
+                  </p>
+
+
+                  <div class="admin-blog-actions">
+
+
+                    <a
+                      href="/blog/<%= blog._id %>"
+                      class="admin-view-button"
+                    >
+                      View
+                    </a>
+
+
+                    <a
+                      href="/blog/<%= blog._id %>/edit"
+                      class="admin-edit-button"
+                    >
+                      Edit
+                    </a>
+
+
+                    <form
+                      action="/blog/<%= blog._id %>?_method=DELETE"
+                      method="POST"
+                    >
+
+                      <button
+                        type="submit"
+                        class="admin-delete-button"
+                      >
+                        Delete
+                      </button>
+
+                    </form>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </article>
+
+
+            <% }) %>
+
+
+          </div>
+
+
+        <% } else { %>
+
+
+          <div class="admin-empty">
+
+            <p>
+              No blog posts yet.
+            </p>
+
+
+            <a
+              href="/blog/new"
+              class="admin-add-button"
+            >
+              Create First Article
+
+              <span>
+                +
+              </span>
+
+            </a>
+
+          </div>
+
+
+        <% } %>
+
+
+      </section>
+
+
+    </section>
+
+  </main>
+
+
+  <%- include('../partials/_footer.ejs') %>
 
 </body>
 

@@ -2,6 +2,7 @@ const cloudinary = require('../config/cloudinary');
 const User = require('../models/user');
 const Designer = require('../models/designer');
 const Project = require('../models/project');
+const Blog = require('../models/blog');
 
 const home = async (req, res) => {
   let profile = null;
@@ -13,12 +14,13 @@ const home = async (req, res) => {
   }
 
   const page = Number(req.query.page) || 1;
-
   const projectsPerPage = 4;
 
   const totalProjects = await Project.countDocuments();
 
-  const totalPages = Math.ceil(totalProjects / projectsPerPage);
+  const totalPages = Math.ceil(
+    totalProjects / projectsPerPage
+  );
 
   const currentPage = Math.min(
     Math.max(page, 1),
@@ -36,9 +38,20 @@ const home = async (req, res) => {
       },
     });
 
+  const latestBlogs = await Blog.find()
+    .sort({ _id: -1 })
+    .limit(4);
+
+  const latestDesigners = await Designer.find()
+    .sort({ _id: -1 })
+    .limit(4)
+    .populate('user');
+
   res.render('index.ejs', {
     profile,
     latestProjects,
+    latestBlogs,
+    latestDesigners,
     currentPage,
     totalPages,
   });
@@ -74,7 +87,9 @@ const uploadProfileImage = async (req, res) => {
     });
 
     if (!designer) {
-      return res.status(404).send('Designer profile not found.');
+      return res
+        .status(404)
+        .send('Designer profile not found.');
     }
 
     const result = await uploadImage(req.file.buffer);
@@ -88,7 +103,9 @@ const uploadProfileImage = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    return res.status(500).send('The image could not be uploaded.');
+    return res
+      .status(500)
+      .send('The image could not be uploaded.');
   }
 };
 

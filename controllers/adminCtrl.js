@@ -1,13 +1,18 @@
 const User = require('../models/user');
 const Designer = require('../models/designer');
 const Project = require('../models/project');
+const Blog = require('../models/blog');
 
 const dashboard = async (req, res) => {
   try {
     const users = await User.find();
+    const designers = await Designer.find().populate('user');
+    const blogs = await Blog.find();
 
     res.render('admin/dashboard.ejs', {
       users,
+      designers,
+      blogs,
     });
   } catch (err) {
     console.log(err);

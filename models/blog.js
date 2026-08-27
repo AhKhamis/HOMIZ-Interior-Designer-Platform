@@ -12,6 +12,10 @@ const blogSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  imagePublicId: {
+    type: String,
+    default: '',
+  },
 });
 
 const Blog = mongoose.model('Blog', blogSchema);
